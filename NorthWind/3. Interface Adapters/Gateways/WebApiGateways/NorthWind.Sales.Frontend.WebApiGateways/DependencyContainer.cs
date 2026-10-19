@@ -8,12 +8,32 @@ public static class DependencyContainer
         Action<IHttpClientBuilder> configureHttpClientBuilder)
     {
         services.AddExceptionDelegatingHandler();
-        var Builder = services
+
+        // Every gateway requires the bearer token handler: all of the
+        // sales endpoints are protected with RequireAuthorization.
+        var CreateOrderBuilder = services
             .AddHttpClient<ICreateOrderGateway,
                 CreateOrderGateway>(configureHttpClient)
             .AddHttpMessageHandler<ExceptionDelegatingHandler>();
+        configureHttpClientBuilder(CreateOrderBuilder);
 
-        configureHttpClientBuilder(Builder);
+        var SearchCustomersBuilder = services
+            .AddHttpClient<ISearchCustomersGateway,
+                SearchCustomersGateway>(configureHttpClient)
+            .AddHttpMessageHandler<ExceptionDelegatingHandler>();
+        configureHttpClientBuilder(SearchCustomersBuilder);
+
+        var SearchProductsBuilder = services
+            .AddHttpClient<ISearchProductsGateway,
+                SearchProductsGateway>(configureHttpClient)
+            .AddHttpMessageHandler<ExceptionDelegatingHandler>();
+        configureHttpClientBuilder(SearchProductsBuilder);
+
+        var InvoiceBuilder = services
+            .AddHttpClient<IInvoiceGateway,
+                InvoiceGateway>(configureHttpClient)
+            .AddHttpMessageHandler<ExceptionDelegatingHandler>();
+        configureHttpClientBuilder(InvoiceBuilder);
 
         return services;
     }

@@ -1,0 +1,78 @@
+@page "/invoices"
+@attribute [Authorize]
+
+<PageTitle>@InvoiceMessages.SearchInvoicesPageTitle</PageTitle>
+
+<h3>@InvoiceMessages.SearchInvoicesHeading</h3>
+
+<div class="invoice-search-bar">
+    <input class="form-control"
+           placeholder="@InvoiceMessages.SearchPlaceholder"
+           @bind=ViewModel.SearchTerm @bind:event="oninput"
+           @onkeyup=HandleKeyUp />
+    <button type="button" class="btn btn-primary"
+            disabled=@IsLoading @onclick=SearchAsync>
+        @InvoiceMessages.SearchButtonText
+    </button>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(ViewModel.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @ViewModel.ErrorMessage
+    </div>
+}
+
+@if (ViewModel.Result is not null && ViewModel.Result.Items.Count > 0)
+{
+    <table class="table invoice-search-table">
+        <thead>
+            <tr>
+                <th>@InvoiceMessages.InvoiceNumberColumn</th>
+                <th>@InvoiceMessages.DateColumn</th>
+                <th>@InvoiceMessages.CustomerColumn</th>
+                <th>@InvoiceMessages.TotalColumn</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Item in ViewModel.Result.Items)
+            {
+                <tr>
+                    <td>@Item.OrderId</td>
+                    <td>@Item.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@Item.CustomerName (@Item.CustomerId)</td>
+                    <td>$@Item.Total.ToString("0.00")</td>
+                    <td class="invoice-search-actions">
+                        <button type="button"
+                                class="btn btn-sm btn-outline-primary"
+                                @onclick="() => ViewInvoice(Item.OrderId)">
+                            @InvoiceMessages.ViewButtonText
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination-bar">
+        <button type="button" class="btn btn-secondary"
+                disabled="@(!ViewModel.CanGoPrevious || IsLoading)"
+                @onclick=PreviousAsync>
+            @InvoiceMessages.PreviousPageText
+        </button>
+        <span class="pagination-page-info">
+            @string.Format(InvoiceMessages.PageInfoTemplate,
+                ViewModel.Result.Page, ViewModel.Result.TotalPages)
+        </span>
+        <button type="button" class="btn btn-secondary"
+                disabled="@(!ViewModel.CanGoNext || IsLoading)"
+                @onclick=NextAsync>
+            @InvoiceMessages.NextPageText
+        </button>
+    </div>
+}
+else if (ViewModel.Result is not null)
+{
+    <div class="invoice-empty">@InvoiceMessages.NoResultsText</div>
+}

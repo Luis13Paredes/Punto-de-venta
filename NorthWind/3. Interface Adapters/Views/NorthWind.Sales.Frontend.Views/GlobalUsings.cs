@@ -1,4 +1,6 @@
 global using NorthWind.Sales.Entities.Dtos.CreateOrder;
+global using NorthWind.Sales.Entities.Dtos.Search;
+global using NorthWind.Sales.Entities.Dtos.Invoice;
 global using NorthWind.Sales.Frontend.BusinessObjects.Interfaces;
 global using NorthWind.Sales.Frontend.Views.Resources;
 global using NorthWind.Validation.Entities.Enums;

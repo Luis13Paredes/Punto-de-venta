@@ -13,4 +13,9 @@ public class Order
     public DiscountType DiscountType { get; set; } = DiscountType.Percentage;
     public double Discount { get; set; } = 10;
     public DateTime OrderDate { get; set; } = DateTime.Now;
+
+    // Totals persisted for invoice reconstruction (requirements 4 and 12).
+    public decimal Subtotal { get; set; }
+    public decimal Tax { get; set; }
+    public decimal Total { get; set; }
 }

@@ -47,6 +47,21 @@
   <data name="CustomerIdRequiredLength" xml:space="preserve">
     <value>La longitud del identificador debe ser 5.</value>
   </data>
+  <data name="CustomerIdInvalidFormat" xml:space="preserve">
+    <value>El identificador debe ser un código de 5 caracteres o una cédula ecuatoriana de 13 dígitos válida.</value>
+  </data>
+  <data name="ShipCityOnlyLetters" xml:space="preserve">
+    <value>La ciudad de envío solo debe contener letras y espacios.</value>
+  </data>
+  <data name="ShipCountryOnlyLetters" xml:space="preserve">
+    <value>El país de envío solo debe contener letras y espacios.</value>
+  </data>
+  <data name="ShipPostalCodeRequired" xml:space="preserve">
+    <value>Debe proporcionar el código postal.</value>
+  </data>
+  <data name="ShipPostalCodeOnlyDigits" xml:space="preserve">
+    <value>El código postal solo debe contener números.</value>
+  </data>
   <data name="ShipAddressRequired" xml:space="preserve">
     <value>Debe proporcionar la dirección de envío.</value>
   </data>

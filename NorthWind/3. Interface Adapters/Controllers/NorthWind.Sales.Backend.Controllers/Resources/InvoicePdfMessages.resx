@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CompanyName" xml:space="preserve">
+    <value>NorthWind</value>
+  </data>
+  <data name="DocumentTitle" xml:space="preserve">
+    <value>FACTURA</value>
+  </data>
+  <data name="InvoiceNumberLabel" xml:space="preserve">
+    <value>Factura N.</value>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="CustomerLabel" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="ShipToLabel" xml:space="preserve">
+    <value>Enviar a</value>
+  </data>
+  <data name="AddressLabel" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="CityLabel" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="CountryLabel" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="PostalCodeLabel" xml:space="preserve">
+    <value>Código Postal</value>
+  </data>
+  <data name="ProductColumn" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+  <data name="QuantityColumn" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
+  <data name="UnitPriceColumn" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+  <data name="LineTotalColumn" xml:space="preserve">
+    <value>Importe</value>
+  </data>
+  <data name="SubtotalLabel" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="TaxLabel" xml:space="preserve">
+    <value>IVA (15%)</value>
+  </data>
+  <data name="TotalLabel" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="PageInfoTemplate" xml:space="preserve">
+    <value>Página {0} de {1}</value>
+  </data>
+</root>

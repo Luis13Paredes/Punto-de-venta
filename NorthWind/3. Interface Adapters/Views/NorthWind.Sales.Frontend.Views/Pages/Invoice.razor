@@ -1,0 +1,107 @@
+@page "/invoice/{OrderId:int}"
+@attribute [Authorize]
+
+<PageTitle>@InvoiceMessages.InvoicePageTitle</PageTitle>
+
+@if (!string.IsNullOrWhiteSpace(ViewModel.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @ViewModel.ErrorMessage
+    </div>
+}
+
+@if (ViewModel.IsLoaded)
+{
+    var Invoice = ViewModel.Invoice!;
+
+    <div class="invoice-card">
+        <div class="invoice-header">
+            <div>
+                <div class="invoice-brand">@InvoicePdfCompany</div>
+                <div class="invoice-document-title">
+                    @InvoiceMessages.InvoicePageTitle
+                </div>
+            </div>
+            <div class="invoice-header-meta">
+                <div>
+                    <strong>@InvoiceMessages.InvoiceNumberLabel</strong>
+                    @Invoice.OrderId
+                </div>
+                <div>
+                    <strong>@InvoiceMessages.OrderDateLabel</strong>
+                    @Invoice.OrderDate.ToString("yyyy-MM-dd HH:mm")
+                </div>
+            </div>
+        </div>
+
+        <div class="invoice-info-grid">
+            <div class="invoice-info-block">
+                <div class="invoice-info-title">
+                    @InvoiceMessages.CustomerLabel
+                </div>
+                <div>@Invoice.CustomerId</div>
+                <div>@Invoice.CustomerName</div>
+            </div>
+            <div class="invoice-info-block">
+                <div class="invoice-info-title">
+                    @InvoiceMessages.ShipToLabel
+                </div>
+                <div>@Invoice.ShipAddress</div>
+                <div>@Invoice.ShipCity, @Invoice.ShipCountry</div>
+                <div>@CreateOrderMessages.ShipPostalCodeLabel: @Invoice.ShipPostalCode</div>
+            </div>
+        </div>
+
+        <table class="table invoice-detail-table">
+            <thead>
+                <tr>
+                    <th>@InvoiceMessages.ProductColumn</th>
+                    <th class="text-end">@InvoiceMessages.QuantityColumn</th>
+                    <th class="text-end">@InvoiceMessages.UnitPriceColumn</th>
+                    <th class="text-end">@InvoiceMessages.LineTotalColumn</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Detail in Invoice.Details)
+                {
+                    <tr>
+                        <td>@Detail.ProductName (#@Detail.ProductId)</td>
+                        <td class="text-end">@Detail.Quantity</td>
+                        <td class="text-end">$@Detail.UnitPrice.ToString("0.00")</td>
+                        <td class="text-end">$@Detail.LineTotal.ToString("0.00")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="invoice-totals">
+            <div class="summary-row">
+                <span>@CreateOrderMessages.SubtotalLabel</span>
+                <span>$@Invoice.Subtotal.ToString("0.00")</span>
+            </div>
+            <div class="summary-row">
+                <span>@CreateOrderMessages.TaxLabel</span>
+                <span>$@Invoice.Tax.ToString("0.00")</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>@CreateOrderMessages.TotalLabel</span>
+                <span>$@Invoice.Total.ToString("0.00")</span>
+            </div>
+        </div>
+
+        <div class="invoice-actions">
+            <button type="button" class="btn btn-primary"
+                    disabled=@IsPdfBusy @onclick=ViewPdfAsync>
+                @InvoiceMessages.ViewPdfButtonText
+            </button>
+            <button type="button" class="btn btn-primary"
+                    disabled=@IsPdfBusy @onclick=DownloadPdfAsync>
+                @InvoiceMessages.DownloadPdfButtonText
+            </button>
+            <button type="button" class="btn btn-outline-secondary"
+                    @onclick=BackToSearch>
+                @InvoiceMessages.BackToSearchText
+            </button>
+        </div>
+    </div>
+}

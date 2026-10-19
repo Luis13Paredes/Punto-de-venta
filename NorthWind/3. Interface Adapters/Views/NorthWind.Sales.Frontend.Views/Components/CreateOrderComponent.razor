@@ -5,10 +5,22 @@
         <label for="customerId">
             @CreateOrderMessages.CustomerIdLabel
         </label>
-        <InputText
-            class="form-control" id="customerId"
-            placeholder="@CreateOrderMessages.CustomerIdLabel"
-            @bind-Value=Order.CustomerId/>
+        <div class="input-group">
+            <InputText
+                class="form-control" id="customerId"
+                placeholder="@CreateOrderMessages.CustomerIdLabel"
+                @bind-Value=Order.CustomerId/>
+            <button type="button" class="btn btn-outline-primary"
+                    @onclick=OpenCustomerSearch>
+                @CreateOrderMessages.SearchCustomerButtonText
+            </button>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Order.CustomerName))
+        {
+            <div class="selected-customer-name">
+                @Order.CustomerName
+            </div>
+        }
         <ValidationMessage For="() => Order.CustomerId"/>
     </div>
     <div class="form-group">
@@ -52,7 +64,7 @@
         <ValidationMessage For="() => Order.ShipPostalCode"/>
     </div>
     <hr />
-    <div class="row">
+    <div class="row order-detail-header">
         <div class="col">
             @CreateOrderMessages.ProductIdLabel
         </div>
@@ -62,21 +74,29 @@
         <div class="col">
             @CreateOrderMessages.QuantityLabel
         </div>
+        <div class="col">
+            @CreateOrderMessages.ActionsColumn
+        </div>
     </div>
 
-    @foreach (var Item in Order.OrderDetails)
+    @for (var Index = 0; Index < Order.OrderDetails.Count; Index++)
     {
-        <div class="row">
+        var Item = Order.OrderDetails[Index];
+        var ItemIndex = Index;
+        <div class="row order-detail-row">
             <div class="col">
                 <InputNumber
                     class="form-control"
                     placeholder="@CreateOrderMessages.ProductIdLabel"
-                    @bind-Value="Item.ProductId" />
+                    @bind-Value="Item.ProductId"
+                    @bind-Value:after="() => OnProductIdChanged(Item)"
+                    @oninput="(e) => OnProductIdInput(e, Item)" />
                 <ValidationMessage For="() => Item.ProductId"/>
             </div>
             <div class="col">
                 <InputNumber
-                    class="form-control"
+                    class="form-control price-fixed"
+                    disabled="disabled"
                     placeholder="@CreateOrderMessages.UnitPriceLabel"
                     @bind-Value="Item.UnitPrice" />
                 <ValidationMessage For="() => Item.UnitPrice"/>
@@ -88,12 +108,45 @@
                     @bind-Value="Item.Quantity" />
                 <ValidationMessage For="() => Item.Quantity"/>
             </div>
+            <div class="col order-row-actions">
+                <button type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        @onclick="() => ChangeProduct(ItemIndex)">
+                    @CreateOrderMessages.ChangeProductButtonText
+                </button>
+                <button type="button"
+                        class="btn btn-sm btn-outline-danger"
+                        @onclick="() => RemoveProduct(Item)">
+                    @CreateOrderMessages.RemoveProductButtonText
+                </button>
+            </div>
         </div>
     }
+
+    <div class="order-summary">
+        <div class="summary-row">
+            <span>@CreateOrderMessages.SubtotalLabel</span>
+            <span>$@Order.Subtotal.ToString("0.00")</span>
+        </div>
+        <div class="summary-row">
+            <span>@CreateOrderMessages.TaxLabel</span>
+            <span>$@Order.TaxAmount.ToString("0.00")</span>
+        </div>
+        <div class="summary-row summary-total">
+            <span>@CreateOrderMessages.TotalLabel</span>
+            <span>$@Order.Total.ToString("0.00")</span>
+        </div>
+    </div>
 
     <div class="row p-3">
         <div class="col">
             <button type="button" class="btn btn-primary"
+                    @onclick=OpenProductSearch>
+                @CreateOrderMessages.SearchProductButtonText
+            </button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-secondary"
                     @onclick=Order.AddNewOrderDetailItem>
                 @CreateOrderMessages.AddProductButtonText
             </button>
@@ -106,7 +159,70 @@
     </div>
 </EditForm>
 
+<SearchModal TItem="CustomerResultDto"
+    @ref=CustomerSearchModal
+    Title="@CreateOrderMessages.SearchCustomersTitle"
+    SearchPlaceholder="@CreateOrderMessages.SearchPlaceholder"
+    SearchButtonText="@CreateOrderMessages.SearchButtonText"
+    NoResultsText="@CreateOrderMessages.NoResultsText"
+    PreviousPageText="@CreateOrderMessages.PreviousPageText"
+    NextPageText="@CreateOrderMessages.NextPageText"
+    PageInfoTemplate="@CreateOrderMessages.PageInfoTemplate"
+    SelectButtonText="@CreateOrderMessages.SelectButtonText"
+    OnSearch="Order.SearchCustomers"
+    OnSelect="Order.SelectCustomer">
+    <HeaderTemplate>
+        <th>@CreateOrderMessages.CustomerIdColumn</th>
+        <th>@CreateOrderMessages.CustomerNameColumn</th>
+        <th>@CreateOrderMessages.CustomerBalanceColumn</th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.Id</td>
+        <td>@context.Name</td>
+        <td>$@context.CurrentBalance.ToString("0.00")</td>
+    </RowTemplate>
+</SearchModal>
+
+<SearchModal TItem="ProductResultDto"
+    @ref=ProductSearchModal
+    Title="@CreateOrderMessages.SearchProductsTitle"
+    SearchPlaceholder="@CreateOrderMessages.SearchPlaceholder"
+    SearchButtonText="@CreateOrderMessages.SearchButtonText"
+    NoResultsText="@CreateOrderMessages.NoResultsText"
+    PreviousPageText="@CreateOrderMessages.PreviousPageText"
+    NextPageText="@CreateOrderMessages.NextPageText"
+    PageInfoTemplate="@CreateOrderMessages.PageInfoTemplate"
+    SelectButtonText="@CreateOrderMessages.SelectButtonText"
+    OnSearch="Order.SearchProducts"
+    OnSelect="OnProductSelected">
+    <HeaderTemplate>
+        <th>@CreateOrderMessages.ProductIdColumn</th>
+        <th>@CreateOrderMessages.ProductNameColumn</th>
+        <th>@CreateOrderMessages.PriceColumn</th>
+        <th>@CreateOrderMessages.StockColumn</th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.Id</td>
+        <td>@context.Name</td>
+        <td>$@context.UnitPrice.ToString("0.00")</td>
+        <td>@context.UnitsInStock</td>
+    </RowTemplate>
+</SearchModal>
+
+<ConfirmModal @ref=ConfirmRemoveModal
+    Title="@CreateOrderMessages.ConfirmRemoveTitle"
+    Message="@CreateOrderMessages.ConfirmRemoveMessage"
+    ConfirmButtonText="@CreateOrderMessages.ConfirmYesButtonText"
+    CancelButtonText="@CreateOrderMessages.ConfirmNoButtonText"
+    OnConfirm=ConfirmRemove />
+
 <hr />
+@if (!string.IsNullOrWhiteSpace(Order.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @Order.ErrorMessage
+    </div>
+}
 @if (!string.IsNullOrWhiteSpace(Order.InformationMessage))
 {
     <div class="alert alert-info">

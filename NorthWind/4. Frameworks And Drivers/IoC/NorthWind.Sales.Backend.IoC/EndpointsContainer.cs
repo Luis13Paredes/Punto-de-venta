@@ -6,6 +6,11 @@ public static class EndpointsContainer
         this WebApplication app)
     {
         app.UseCreateOrderController();
+        app.UseSearchCustomersController();
+        app.UseSearchProductsController();
+        app.UseGetInvoiceController();
+        app.UseSearchInvoicesController();
+        app.UseGetInvoicePdfController();
         app.UseMembershipEndpoints();
 
         return app;

@@ -32,9 +32,8 @@ namespace NorthWind.Sales.Backend.DataContexts.EFCore.Migrations
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nchar(5)")
-                        .IsFixedLength();
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<double>("Discount")
                         .HasColumnType("float");
@@ -68,6 +67,18 @@ namespace NorthWind.Sales.Backend.DataContexts.EFCore.Migrations
                     b.Property<int>("ShippingType")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Subtotal")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("Tax")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("Total")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
@@ -78,9 +89,8 @@ namespace NorthWind.Sales.Backend.DataContexts.EFCore.Migrations
             modelBuilder.Entity("NorthWind.Sales.Backend.Repositories.Entities.Customer", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(5)
-                        .HasColumnType("nchar(5)")
-                        .IsFixedLength();
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<decimal>("CurrentBalance")
                         .HasPrecision(8, 2)
@@ -150,6 +160,11 @@ namespace NorthWind.Sales.Backend.DataContexts.EFCore.Migrations
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<decimal>("UnitPrice")
                         .HasPrecision(8, 2)

@@ -38,6 +38,13 @@ public class OrderAggregate : Order
                 Item.UnitPrice, Item.Quantity);
         }
 
+        // Requirement 4: calculate subtotal, tax (IVA) and total.
+        OrderTotals Totals = OrderTotals.Calculate(
+            OrderAggregate.OrderDetails);
+        OrderAggregate.Subtotal = Totals.Subtotal;
+        OrderAggregate.Tax = Totals.TaxAmount;
+        OrderAggregate.Total = Totals.Total;
+
         return OrderAggregate;
     }
 }

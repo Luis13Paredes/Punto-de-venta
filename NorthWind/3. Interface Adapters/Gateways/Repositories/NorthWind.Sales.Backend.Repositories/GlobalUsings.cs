@@ -4,4 +4,6 @@ global using NorthWind.Sales.Backend.BusinessObjects.ValueObjects;
 global using NorthWind.Sales.Backend.BusinessObjects.Interfaces.Repositories;
 global using NorthWind.Sales.Backend.Repositories.Interfaces;
 global using NorthWind.Sales.Backend.Repositories.Repositories;
+global using NorthWind.Sales.Entities.Dtos.Search;
+global using NorthWind.Sales.Entities.Dtos.Invoice;
 global using NorthWind.DomainLogs.Entities.Interfaces;

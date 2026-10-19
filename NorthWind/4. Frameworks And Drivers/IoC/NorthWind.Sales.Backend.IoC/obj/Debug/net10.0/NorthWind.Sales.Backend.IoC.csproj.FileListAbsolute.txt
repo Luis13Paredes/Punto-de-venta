@@ -93,3 +93,4 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\IoC\NorthWind.Sales.Backend.IoC\obj\Debug\net10.0\NorthWind.Sales.Backend.IoC.pdb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\IoC\NorthWind.Sales.Backend.IoC\obj\Debug\net10.0\ref\NorthWind.Sales.Backend.IoC.dll
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\IoC\NorthWind.Sales.Backend.IoC\obj\Debug\net10.0\NorthWind.Sales.Backend.IoC.sourcelink.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\IoC\NorthWind.Sales.Backend.IoC\bin\Debug\net10.0\QuestPDF.Fonts.Lato.br

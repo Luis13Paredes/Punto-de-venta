@@ -5,9 +5,11 @@ internal class CommandsRepository(INorthWindSalesCommandsDataContext context) :
 {
     public async Task CreateOrder(OrderAggregate order)
     {
+        var OrderDetails = order.OrderDetails.ToArray();
+
         await context.AddOrderAsync(order);
         await context.AddOrderDetailsAsync(
-            order.OrderDetails
+            OrderDetails
             .Select(d => new Entities.OrderDetail
             {
                 Order = order,
@@ -16,6 +18,14 @@ internal class CommandsRepository(INorthWindSalesCommandsDataContext context) :
                 UnitPrice = d.UnitPrice
 
             }).ToArray());
+
+        // Requirement 7: automatic inventory decrease, executed inside
+        // the same transaction with optimistic concurrency (RowVersion).
+        foreach (var Detail in OrderDetails)
+        {
+            await context.DecreaseProductStockAsync(
+                Detail.ProductId, Detail.Quantity);
+        }
     }
 
     public async Task SaveChanges() =>

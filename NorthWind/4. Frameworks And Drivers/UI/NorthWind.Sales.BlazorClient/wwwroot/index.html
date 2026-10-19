@@ -29,6 +29,25 @@
         <span class="dismiss">🗙</span>
     </div>
     <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
+    <script>
+        window.northwind = {
+            openPdf: function (name, bytes) {
+                const blob = new Blob([bytes], { type: "application/pdf" });
+                const url = URL.createObjectURL(blob);
+                window.open(url, "_blank");
+                setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+            },
+            downloadPdf: function (name, bytes) {
+                const blob = new Blob([bytes], { type: "application/pdf" });
+                const url = URL.createObjectURL(blob);
+                const anchor = document.createElement("a");
+                anchor.href = url;
+                anchor.download = name;
+                anchor.click();
+                URL.revokeObjectURL(url);
+            }
+        };
+    </script>
 </body>
 
 </html>

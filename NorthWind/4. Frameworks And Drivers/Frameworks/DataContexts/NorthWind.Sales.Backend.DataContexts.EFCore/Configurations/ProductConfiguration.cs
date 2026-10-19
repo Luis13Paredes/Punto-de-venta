@@ -12,6 +12,10 @@ internal class ProductConfiguration :
         builder.Property(p => p.UnitPrice)
             .HasPrecision(8, 2);
 
+        // Optimistic concurrency: SQL Server rowversion column.
+        builder.Property(p => p.RowVersion)
+            .IsRowVersion();
+
         builder.HasData(
             new Repositories.Entities.Product
             {

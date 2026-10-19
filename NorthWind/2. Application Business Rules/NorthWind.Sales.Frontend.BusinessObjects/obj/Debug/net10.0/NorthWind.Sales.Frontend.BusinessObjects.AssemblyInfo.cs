@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NorthWind.Sales.Frontend.BusinessObjects")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c414e4930d03551ded57788928f4694549cebb7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+726957cad5a715bdd5fc0562f84def8d35c2a8f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("NorthWind.Sales.Frontend.BusinessObjects")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NorthWind.Sales.Frontend.BusinessObjects")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

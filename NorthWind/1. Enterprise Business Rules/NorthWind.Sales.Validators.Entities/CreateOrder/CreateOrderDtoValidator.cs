@@ -10,7 +10,8 @@ internal class CreateOrderDtoValidator :
     {
         AddRuleFor(c => c.CustomerId)
             .NotEmpty(CreateOrderMessages.CustomerIdRequired)
-            .Length(5, CreateOrderMessages.CustomerIdRequiredLength);
+            .Must(CustomerIdHasValidFormat,
+                CreateOrderMessages.CustomerIdInvalidFormat);
 
         AddRuleFor(c => c.ShipAddress)
             .NotEmpty(CreateOrderMessages.ShipAddressRequired)
@@ -19,15 +20,22 @@ internal class CreateOrderDtoValidator :
         AddRuleFor(c => c.ShipCity)
             .NotEmpty(CreateOrderMessages.ShipCityRequired)
             .MinimumLength(3, CreateOrderMessages.ShipCityMinimumLength)
-            .MaximumLength(15, CreateOrderMessages.ShipCityMaximumLength);
+            .MaximumLength(15, CreateOrderMessages.ShipCityMaximumLength)
+            .Matches(@"^[A-Za-zÁÉÍÓÚÜáéíóúüñÑ ]+$",
+                CreateOrderMessages.ShipCityOnlyLetters);
 
         AddRuleFor(c => c.ShipCountry)
             .NotEmpty(CreateOrderMessages.ShipCountryRequired)
             .MinimumLength(3, CreateOrderMessages.ShipCountryMinimumLength)
-            .MaximumLength(15, CreateOrderMessages.ShipCountryMaximumLength);
+            .MaximumLength(15, CreateOrderMessages.ShipCountryMaximumLength)
+            .Matches(@"^[A-Za-zÁÉÍÓÚÜáéíóúüñÑ ]+$",
+                CreateOrderMessages.ShipCountryOnlyLetters);
 
         AddRuleFor(c => c.ShipPostalCode)
-            .MaximumLength(10, CreateOrderMessages.ShipPostalCodeMaximumLength);
+            .NotEmpty(CreateOrderMessages.ShipPostalCodeRequired)
+            .MaximumLength(10, CreateOrderMessages.ShipPostalCodeMaximumLength)
+            .Matches(@"^[0-9]*$",
+                CreateOrderMessages.ShipPostalCodeOnlyDigits);
 
         AddRuleFor(c => c.OrderDetails)
             .NotNull(CreateOrderMessages.OrderDetailsRequired)
@@ -36,4 +44,10 @@ internal class CreateOrderDtoValidator :
         AddRuleForEach(c => c.OrderDetails)
             .SetValidator(detailValidator);
     }
+
+    // Requirement 6: the customer id must be either the 5 character
+    // legacy code or a valid 13 digit Ecuadorian national id number.
+    static bool CustomerIdHasValidFormat(string? customerId) =>
+        customerId is not null &&
+        (customerId.Length == 5 || EcuadorianId.IsValid(customerId));
 }

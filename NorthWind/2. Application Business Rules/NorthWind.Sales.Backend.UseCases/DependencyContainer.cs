@@ -6,6 +6,10 @@ public static class DependencyContainer
         this IServiceCollection services)
     {
         services.AddScoped<ICreateOrderInputPort, CreateOrderInteractor>();
+        services.AddScoped<ISearchCustomersInputPort, SearchCustomersInteractor>();
+        services.AddScoped<ISearchProductsInputPort, SearchProductsInteractor>();
+        services.AddScoped<IGetInvoiceInputPort, GetInvoiceInteractor>();
+        services.AddScoped<ISearchInvoicesInputPort, SearchInvoicesInteractor>();
 
         services.AddModelValidator<CreateOrderDto,
             CreateOrderCustomerValidator>();

@@ -5,10 +5,19 @@ internal class OrderConfiguration :
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
+        // Up to 13 characters to allow Ecuadorian national id numbers.
         builder.Property(o => o.CustomerId)
             .IsRequired()
-            .HasMaxLength(5)
-            .IsFixedLength();
+            .HasMaxLength(13);
+
+        builder.Property(o => o.Subtotal)
+            .HasPrecision(10, 2);
+
+        builder.Property(o => o.Tax)
+            .HasPrecision(10, 2);
+
+        builder.Property(o => o.Total)
+            .HasPrecision(10, 2);
 
         builder.Property(o => o.ShipAddress)
             .IsRequired()

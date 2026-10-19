@@ -65,10 +65,106 @@
   <data name="CreatedOrderTemplate" xml:space="preserve">
     <value>Orden {0} creada.</value>
   </data>
+  <data name="TransactionCompletedMessage" xml:space="preserve">
+    <value>Transacción completada: la orden {0} fue creada exitosamente.</value>
+  </data>
+  <data name="TransactionFailedMessage" xml:space="preserve">
+    <value>La transacción falló: la orden no fue guardada. Intente nuevamente.</value>
+  </data>
+  <data name="SubtotalLabel" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="TaxLabel" xml:space="preserve">
+    <value>IVA (15%)</value>
+  </data>
+  <data name="TotalLabel" xml:space="preserve">
+    <value>Total</value>
+  </data>
   <data name="CreateOrderMenuItemTitle" xml:space="preserve">
     <value>Crear orden</value>
   </data>
   <data name="CreateOrderPageTitle" xml:space="preserve">
     <value>Crear orden de compra</value>
+  </data>
+  <data name="SearchCustomersTitle" xml:space="preserve">
+    <value>Buscar cliente</value>
+  </data>
+  <data name="SearchProductsTitle" xml:space="preserve">
+    <value>Buscar producto</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Ingrese término de búsqueda...</value>
+  </data>
+  <data name="SearchButtonText" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="NoResultsText" xml:space="preserve">
+    <value>No se encontraron resultados.</value>
+  </data>
+  <data name="PreviousPageText" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="NextPageText" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="PageInfoTemplate" xml:space="preserve">
+    <value>Página {0} de {1}</value>
+  </data>
+  <data name="ChangeProductButtonText" xml:space="preserve">
+    <value>Cambiar</value>
+  </data>
+  <data name="RemoveProductButtonText" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="SelectButtonText" xml:space="preserve">
+    <value>Seleccionar</value>
+  </data>
+  <data name="ProductAlreadyInOrderMessage" xml:space="preserve">
+    <value>El producto ya fue agregado a la orden.</value>
+  </data>
+  <data name="CustomerNameColumn" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="CustomerBalanceColumn" xml:space="preserve">
+    <value>Saldo</value>
+  </data>
+  <data name="ProductIdColumn" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="ProductNameColumn" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="PriceColumn" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+  <data name="StockColumn" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="SearchCustomerButtonText" xml:space="preserve">
+    <value>Buscar cliente</value>
+  </data>
+  <data name="ActionsColumn" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="SearchProductButtonText" xml:space="preserve">
+    <value>Buscar producto</value>
+  </data>
+  <data name="CustomerIdColumn" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="ConfirmRemoveTitle" xml:space="preserve">
+    <value>Confirmar eliminación</value>
+  </data>
+  <data name="ConfirmRemoveMessage" xml:space="preserve">
+    <value>¿Está seguro de eliminar el producto?</value>
+  </data>
+  <data name="ConfirmYesButtonText" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="ConfirmNoButtonText" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DuplicateProductsMessage" xml:space="preserve">
+    <value>No se puede crear la orden: hay productos duplicados (Id: {0}).</value>
   </data>
 </root>

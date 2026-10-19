@@ -110,4 +110,14 @@ internal class ValidationRules<T, TProperty>(
 
         return ThisAsStringValidationRules;
     }
+
+    public IValidationRules<T, string> Matches(string pattern,
+        string errorMessage)
+    {
+        StringRuleBuilder
+            .Matches(pattern)
+            .WithMessage(errorMessage);
+
+        return ThisAsStringValidationRules;
+    }
 }

@@ -57,3 +57,6 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Con
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Controllers\NorthWind.Sales.Backend.Controllers\obj\Debug\net10.0\NorthWind.Sales.Backend.Controllers.pdb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Controllers\NorthWind.Sales.Backend.Controllers\obj\Debug\net10.0\ref\NorthWind.Sales.Backend.Controllers.dll
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Controllers\NorthWind.Sales.Backend.Controllers\obj\Debug\net10.0\NorthWind.Sales.Backend.Controllers.sourcelink.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Controllers\NorthWind.Sales.Backend.Controllers\bin\Debug\net10.0\QuestPDF.Fonts.Lato.br
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Controllers\NorthWind.Sales.Backend.Controllers\obj\Debug\net10.0\NorthWind.Sales.Backend.Controllers.Resources.InvoicePdfMessages.resources
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Controllers\NorthWind.Sales.Backend.Controllers\obj\Debug\net10.0\NorthWind.Sales.Backend.Controllers.csproj.GenerateResource.cache

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CT0ZkYGmZWk=",
+  "dgSpecHash": "lYBoZCNNjHc=",
   "success": true,
   "projectFilePath": "D:\\ESTUDIANTES_PRACTICA\\ESTUDIANTES_PRACTICA\\NorthWind\\4. Frameworks And Drivers\\IoC\\NorthWind.Sales.Backend.IoC\\NorthWind.Sales.Backend.IoC.csproj",
   "expectedPackageFiles": [
@@ -49,12 +49,13 @@
     "C:\\Users\\User\\.nuget\\packages\\northwind.membership.backend.core\\1.0.0\\northwind.membership.backend.core.1.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\northwind.membership.entities\\1.0.0\\northwind.membership.entities.1.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\northwind.result.entities\\1.0.0\\northwind.result.entities.1.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\questpdf\\2026.9.1\\questpdf.2026.9.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.clientmodel\\1.8.0\\system.clientmodel.1.8.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.configuration.configurationmanager\\9.0.11\\system.configuration.configurationmanager.9.0.11.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.11\\system.diagnostics.eventlog.9.0.11.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.7.1\\system.identitymodel.tokens.jwt.7.7.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.memory.data\\8.0.1\\system.memory.data.8.0.1.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.11\\system.security.cryptography.pkcs.9.0.11.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.security.cryptography.pkcs\\10.0.13\\system.security.cryptography.pkcs.10.0.13.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.11\\system.security.cryptography.protecteddata.9.0.11.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\northwind.validation.entities\\1.0.0\\northwind.validation.entities.1.0.0.nupkg.sha512"
   ],

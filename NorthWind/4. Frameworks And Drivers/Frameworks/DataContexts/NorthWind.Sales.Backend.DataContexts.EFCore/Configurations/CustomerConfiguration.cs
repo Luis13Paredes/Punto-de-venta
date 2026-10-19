@@ -5,10 +5,10 @@ internal class CustomerConfiguration :
 {
     public void Configure(EntityTypeBuilder<Repositories.Entities.Customer> builder)
     {
+        // Up to 13 characters to allow Ecuadorian national id numbers.
         builder
             .Property(c => c.Id)
-            .HasMaxLength(5)
-            .IsFixedLength();
+            .HasMaxLength(13);
 
         builder.Property(c => c.Name)
             .IsRequired()

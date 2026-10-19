@@ -1,0 +1,24 @@
+@if (IsOpen)
+{
+    @* Same rule as SearchModal: clicking outside must NOT close it;
+       only the buttons close the confirmation. *@
+    <div class="confirm-modal-overlay"></div>
+    <div class="confirm-modal" role="alertdialog" aria-modal="true">
+        <div class="confirm-modal-header">
+            <h5 class="confirm-modal-title">@Title</h5>
+        </div>
+        <div class="confirm-modal-body">
+            <p class="confirm-modal-message">@Message</p>
+        </div>
+        <div class="confirm-modal-footer">
+            <button type="button" class="btn btn-primary"
+                    @onclick=ConfirmAsync>
+                @ConfirmButtonText
+            </button>
+            <button type="button" class="btn btn-secondary"
+                    @onclick=Close>
+                @CancelButtonText
+            </button>
+        </div>
+    </div>
+}

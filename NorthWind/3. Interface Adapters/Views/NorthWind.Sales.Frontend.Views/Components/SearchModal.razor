@@ -1,0 +1,73 @@
+@typeparam TItem
+
+@if (IsOpen)
+{
+    @* Requirement: clicking outside must NOT close the modal;
+       only the close button or a selection closes it. *@
+    <div class="search-modal-overlay"></div>
+    <div class="search-modal" role="dialog" aria-modal="true">
+        <div class="search-modal-header">
+            <h5 class="search-modal-title">@Title</h5>
+            <button type="button" class="search-modal-close"
+                    @onclick=Close aria-label="Close">&times;</button>
+        </div>
+        <div class="search-modal-body">
+            <div class="search-modal-toolbar">
+                <input class="form-control search-modal-input"
+                       placeholder="@SearchPlaceholder"
+                       value="@SearchTerm"
+                       @oninput=HandleSearchInput
+                       @onkeyup=HandleKeyUp />
+                <button type="button" class="btn btn-primary"
+                        disabled=@IsLoading @onclick=SearchAsync>
+                    @SearchButtonText
+                </button>
+            </div>
+
+            @if (Result is not null && Result.Items.Count > 0)
+            {
+                <table class="table search-modal-table">
+                    <thead>
+                        <tr>
+                            @HeaderTemplate
+                            <th>@SelectButtonText</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Item in Result.Items)
+                        {
+                            var Current = Item;
+                            <tr class="search-modal-row"
+                                @onclick="() => SelectAsync(Current)">
+                                @RowTemplate!(Current)
+                                <td class="search-modal-select-cell">
+                                    <span class="search-modal-select-mark">&#10003;</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else if (Result is not null)
+            {
+                <div class="search-modal-empty">@NoResultsText</div>
+            }
+        </div>
+        <div class="search-modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    disabled="@(!CanGoPrevious || IsLoading)"
+                    @onclick=PreviousAsync>
+                @PreviousPageText
+            </button>
+            <span class="search-modal-page-info">
+                @string.Format(PageInfoTemplate,
+                    Result?.Page ?? 0, Result?.TotalPages ?? 0)
+            </span>
+            <button type="button" class="btn btn-secondary"
+                    disabled="@(!CanGoNext || IsLoading)"
+                    @onclick=NextAsync>
+                @NextPageText
+            </button>
+        </div>
+    </div>
+}

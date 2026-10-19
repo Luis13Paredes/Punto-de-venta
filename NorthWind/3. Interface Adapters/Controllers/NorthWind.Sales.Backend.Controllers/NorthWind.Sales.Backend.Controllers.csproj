@@ -14,4 +14,9 @@
     <FrameworkReference Include="Microsoft.AspNetCore.app" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="QuestPDF" Version="2026.9.1" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
+  </ItemGroup>
+
 </Project>

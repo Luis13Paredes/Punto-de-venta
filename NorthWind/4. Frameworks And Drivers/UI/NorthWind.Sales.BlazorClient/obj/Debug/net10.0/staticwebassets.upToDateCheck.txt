@@ -46,7 +46,6 @@ wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 wwwroot\appsettings.json
-D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\css\app.css
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -92,3 +91,4 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\appsettings.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.BlazorClient\wwwroot\css\app.css

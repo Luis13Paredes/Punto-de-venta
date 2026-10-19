@@ -23,6 +23,16 @@ public static class CreateOrderMessages
         ResourceManager.GetString(nameof(CustomerIdRequired), Culture)!;
     public static string CustomerIdRequiredLength =>
         ResourceManager.GetString(nameof(CustomerIdRequiredLength), Culture)!;
+    public static string CustomerIdInvalidFormat =>
+        ResourceManager.GetString(nameof(CustomerIdInvalidFormat), Culture)!;
+    public static string ShipCityOnlyLetters =>
+        ResourceManager.GetString(nameof(ShipCityOnlyLetters), Culture)!;
+    public static string ShipCountryOnlyLetters =>
+        ResourceManager.GetString(nameof(ShipCountryOnlyLetters), Culture)!;
+    public static string ShipPostalCodeRequired =>
+        ResourceManager.GetString(nameof(ShipPostalCodeRequired), Culture)!;
+    public static string ShipPostalCodeOnlyDigits =>
+        ResourceManager.GetString(nameof(ShipPostalCodeOnlyDigits), Culture)!;
     public static string ShipAddressRequired =>
         ResourceManager.GetString(nameof(ShipAddressRequired), Culture)!;
     public static string ShipAddressMaximumLength =>
