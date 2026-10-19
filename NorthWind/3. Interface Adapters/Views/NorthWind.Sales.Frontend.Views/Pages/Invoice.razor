@@ -5,10 +5,17 @@
 
 @if (!string.IsNullOrWhiteSpace(ViewModel.ErrorMessage))
 {
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" role="alert">
         @ViewModel.ErrorMessage
     </div>
 }
+
+<div class="page-toolbar">
+    <button type="button" class="btn btn-outline-secondary"
+            @onclick=BackToSearch>
+        &larr; @InvoiceMessages.BackToSearchText
+    </button>
+</div>
 
 @if (ViewModel.IsLoaded)
 {
@@ -18,14 +25,16 @@
         <div class="invoice-header">
             <div>
                 <div class="invoice-brand">@InvoicePdfCompany</div>
-                <div class="invoice-document-title">
+                <h1 class="invoice-document-title">
                     @InvoiceMessages.InvoicePageTitle
-                </div>
+                </h1>
             </div>
             <div class="invoice-header-meta">
                 <div>
-                    <strong>@InvoiceMessages.InvoiceNumberLabel</strong>
-                    @Invoice.OrderId
+                    <span class="invoice-number-badge">
+                        <strong>@InvoiceMessages.InvoiceNumberLabel</strong>
+                        @Invoice.OrderId
+                    </span>
                 </div>
                 <div>
                     <strong>@InvoiceMessages.OrderDateLabel</strong>

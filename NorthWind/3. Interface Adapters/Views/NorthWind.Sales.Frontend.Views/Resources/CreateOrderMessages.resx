@@ -167,4 +167,13 @@
   <data name="DuplicateProductsMessage" xml:space="preserve">
     <value>No se puede crear la orden: hay productos duplicados (Id: {0}).</value>
   </data>
+  <data name="ShippingSectionTitle" xml:space="preserve">
+    <value>Cliente y envío</value>
+  </data>
+  <data name="OrderDetailSectionTitle" xml:space="preserve">
+    <value>Detalle de la orden</value>
+  </data>
+  <data name="OrderEmptyHintText" xml:space="preserve">
+    <value>No hay productos en la orden. Use las opciones Agregar producto o Buscar producto para comenzar.</value>
+  </data>
 </root>

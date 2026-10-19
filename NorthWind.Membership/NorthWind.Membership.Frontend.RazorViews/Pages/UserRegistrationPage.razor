@@ -1,13 +1,26 @@
 @page "/user/register"
 
-<ErrorBoundary @ref=ErrorBoundaryRef>
-    <ChildContent>
-        <UserRegistrationComponent ViewModel=ViewModel/>
-    </ChildContent>
-    <ErrorContent>
-        <ExceptionDisplay Exception=context />
-        <button class="btn btn-danger" @onclick=Recover>
-            @CommonMessages.OK
-        </button>
-    </ErrorContent>
-</ErrorBoundary>
+<PageTitle>@CommonMessages.CreateAccountText</PageTitle>
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="auth-brand">NorthWind Sales</div>
+        <h1 class="auth-title">@CommonMessages.CreateAccountText</h1>
+
+        <ErrorBoundary @ref=ErrorBoundaryRef>
+            <ChildContent>
+                <UserRegistrationComponent ViewModel=ViewModel/>
+            </ChildContent>
+            <ErrorContent>
+                <ExceptionDisplay Exception=context />
+                <button class="btn btn-danger" @onclick=Recover>
+                    @CommonMessages.OK
+                </button>
+            </ErrorContent>
+        </ErrorBoundary>
+
+        <div class="auth-footer">
+            <a href="user/login">&larr; @CommonMessages.LoginText</a>
+        </div>
+    </div>
+</div>

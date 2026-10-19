@@ -1,24 +1,24 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.oqyk4aj4ro.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.qglks1wkcs.bundle.scp.css'))">
       <SourceType>Package</SourceType>
       <SourceId>NorthWind.RazorComponents</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/NorthWind.RazorComponents</BasePath>
-      <RelativePath>NorthWind.RazorComponents.oqyk4aj4ro.bundle.scp.css</RelativePath>
+      <RelativePath>NorthWind.RazorComponents.qglks1wkcs.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>oqyk4aj4ro</Fingerprint>
-      <Integrity>4AiiFip5qilW7/vF2UllrcjtISc2E9z1q0IHZHWpJZo=</Integrity>
+      <Fingerprint>qglks1wkcs</Fingerprint>
+      <Integrity>VhbuCFI/d9rJs6+ivu2Q+7hJWe2ZAyClyB2hFSjMCj0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <FileLength>2697</FileLength>
-      <LastWriteTime>Tue, 13 Oct 2026 20:07:49 GMT</LastWriteTime>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.oqyk4aj4ro.bundle.scp.css'))</OriginalItemSpec>
+      <FileLength>4839</FileLength>
+      <LastWriteTime>Mon, 19 Oct 2026 21:45:36 GMT</LastWriteTime>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.qglks1wkcs.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

@@ -68,20 +68,18 @@
         <ValidationMessage For="@(() => ViewModel.PasswordConfirmation)" />
     </div>
 
-    <div class="row p-3">
-        <div class="col">
-            <button class="btn btn-primary">
-                @UserRegistrationMessages.RegisterButtonText
-            </button>
-        </div>
+    <div class="form-actions">
+        <button class="btn btn-primary btn-block">
+            @UserRegistrationMessages.RegisterButtonText
+        </button>
     </div>
 </EditForm>
 
-<hr />
-
 @if (!string.IsNullOrWhiteSpace(ViewModel.InformationMessage))
 {
-    <div class="alert alert-info">
-        @ViewModel.InformationMessage
+    <div class="form-alerts">
+        <div class="alert alert-info" role="status">
+            @ViewModel.InformationMessage
+        </div>
     </div>
 }

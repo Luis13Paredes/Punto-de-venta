@@ -103,4 +103,10 @@ public static class CreateOrderMessages
         ResourceManager.GetString(nameof(ConfirmNoButtonText), Culture)!;
     public static string DuplicateProductsMessage =>
         ResourceManager.GetString(nameof(DuplicateProductsMessage), Culture)!;
+    public static string ShippingSectionTitle =>
+        ResourceManager.GetString(nameof(ShippingSectionTitle), Culture)!;
+    public static string OrderDetailSectionTitle =>
+        ResourceManager.GetString(nameof(OrderDetailSectionTitle), Culture)!;
+    public static string OrderEmptyHintText =>
+        ResourceManager.GetString(nameof(OrderEmptyHintText), Culture)!;
 }

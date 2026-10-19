@@ -1,27 +1,36 @@
 .nav-item[b-gz4gyelbdq] {
     font-size: 0.95rem;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-weight: 400;
-    padding-top: 0.4rem;
+    font-weight: 500;
+    padding: 0.15rem 0.15rem;
 }
 
     .nav-item[b-gz4gyelbdq]  a {
-        color: rgba(255, 255, 255, 0.85);
-        border-radius: 6px;
-        height: 3rem;
+        color: rgba(255, 255, 255, 0.86);
+        border-radius: 8px;
+        height: 2.85rem;
         display: flex;
         align-items: center;
-        line-height: 3rem;
-        transition: background-color 0.2s ease;
+        line-height: 1;
+        padding: 0 0.85rem;
+        transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        border-left: 3px solid transparent;
     }
 
 .nav-item[b-gz4gyelbdq]  a.active {
-    background-color: rgba(255, 255, 255, 0.25);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.17);
+    color: #ffffff;
     box-shadow: none;
+    border-left-color: #8ec3f7;
 }
 
 .nav-item[b-gz4gyelbdq]  a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-item[b-gz4gyelbdq]  a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.65);
+    outline-offset: -2px;
 }

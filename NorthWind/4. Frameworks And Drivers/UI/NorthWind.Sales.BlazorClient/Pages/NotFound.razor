@@ -1,5 +1,16 @@
 ﻿@page "/not-found"
 @layout MainLayout
+@using NorthWind.Sales.Frontend.Views.Resources
 
-<h3>Not Found</h3>
-<p>Sorry, the content you are looking for does not exist.</p>
+<PageTitle>@CommonMessages.NotFoundTitle</PageTitle>
+
+<div class="page-header">
+    <h1>@CommonMessages.NotFoundTitle</h1>
+    <p class="page-subtitle">@CommonMessages.NotFoundText</p>
+</div>
+
+<div class="page-toolbar">
+    <a class="btn btn-primary" href="">
+        &larr; @CommonMessages.HomeMenuItemTitle
+    </a>
+</div>

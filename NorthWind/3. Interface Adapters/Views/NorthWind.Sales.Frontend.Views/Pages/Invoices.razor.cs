@@ -14,6 +14,12 @@ public partial class Invoices
 
     bool IsLoading;
 
+    protected override async Task OnInitializedAsync()
+    {
+        if (ViewModel.Result is null)
+            await SearchAsync();
+    }
+
     async Task SearchAsync()
     {
         IsLoading = true;

@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
     <StaticWebAssetEndpoint Include="_content/NorthWind.RazorComponents/NorthWind.RazorComponents.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.oqyk4aj4ro.bundle.scp.css'))</AssetFile>
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.qglks1wkcs.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-4AiiFip5qilW7/vF2UllrcjtISc2E9z1q0IHZHWpJZo="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2697"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00224AiiFip5qilW7/vF2UllrcjtISc2E9z1q0IHZHWpJZo=\u0022"},{"Name":"Last-Modified","Value":"Tue, 13 Oct 2026 20:07:49 GMT"},{"Name":"Vary","Value":"Accept-Encoding"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-VhbuCFI/d9rJs6\u002Bivu2Q\u002B7hJWe2ZAyClyB2hFSjMCj0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4839"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VhbuCFI/d9rJs6\u002Bivu2Q\u002B7hJWe2ZAyClyB2hFSjMCj0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 19 Oct 2026 21:45:36 GMT"},{"Name":"Vary","Value":"Accept-Encoding"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/NorthWind.RazorComponents/NorthWind.RazorComponents.oqyk4aj4ro.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.oqyk4aj4ro.bundle.scp.css'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/NorthWind.RazorComponents/NorthWind.RazorComponents.qglks1wkcs.bundle.scp.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\NorthWind.RazorComponents.qglks1wkcs.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"oqyk4aj4ro"},{"Name":"integrity","Value":"sha256-4AiiFip5qilW7/vF2UllrcjtISc2E9z1q0IHZHWpJZo="},{"Name":"label","Value":"_content/NorthWind.RazorComponents/NorthWind.RazorComponents.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2697"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00224AiiFip5qilW7/vF2UllrcjtISc2E9z1q0IHZHWpJZo=\u0022"},{"Name":"Last-Modified","Value":"Tue, 13 Oct 2026 20:07:49 GMT"},{"Name":"Vary","Value":"Accept-Encoding"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qglks1wkcs"},{"Name":"integrity","Value":"sha256-VhbuCFI/d9rJs6\u002Bivu2Q\u002B7hJWe2ZAyClyB2hFSjMCj0="},{"Name":"label","Value":"_content/NorthWind.RazorComponents/NorthWind.RazorComponents.bundle.scp.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4839"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022VhbuCFI/d9rJs6\u002Bivu2Q\u002B7hJWe2ZAyClyB2hFSjMCj0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 19 Oct 2026 21:45:36 GMT"},{"Name":"Vary","Value":"Accept-Encoding"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>

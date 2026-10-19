@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <authors>NorthWind.Membership.Frontend.RazorViews</authors>
     <description>Package Description</description>
-    <repository type="git" />
+    <repository type="git" commit="d673490ab0ad794a12cd32a1a1f3d6ceff13597c" />
     <dependencies>
       <group targetFramework="net10.0">
         <dependency id="Microsoft.AspNetCore.Components.Authorization" version="10.0.0" exclude="Build,Analyzers" />
@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\APIMOVILES\ESTUDIANTES_PRACTICA\NorthWind.Membership\NorthWind.Membership.Frontend.RazorViews\bin\Release\net10.0\NorthWind.Membership.Frontend.RazorViews.dll" target="lib\net10.0\NorthWind.Membership.Frontend.RazorViews.dll" />
+    <file src="D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind.Membership\NorthWind.Membership.Frontend.RazorViews\bin\Release\net10.0\NorthWind.Membership.Frontend.RazorViews.dll" target="lib\net10.0\NorthWind.Membership.Frontend.RazorViews.dll" />
   </files>
 </package>

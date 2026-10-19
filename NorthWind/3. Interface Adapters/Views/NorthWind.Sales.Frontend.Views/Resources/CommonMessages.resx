@@ -44,4 +44,28 @@
   <data name="AboutTitle" xml:space="preserve">
     <value>Acerca de</value>
   </data>
+  <data name="WelcomeHeading" xml:space="preserve">
+    <value>Bienvenido a NorthWind Sales</value>
+  </data>
+  <data name="WelcomeSubtitle" xml:space="preserve">
+    <value>Punto de venta: registre órdenes de compra y consulte facturas desde un solo lugar.</value>
+  </data>
+  <data name="WelcomeNewOrderText" xml:space="preserve">
+    <value>Cree una nueva orden con búsqueda de clientes y productos, IVA calculado y confirmación inmediata.</value>
+  </data>
+  <data name="WelcomeInvoicesText" xml:space="preserve">
+    <value>Busque facturas por número o cliente, visualícelas en pantalla o descárguelas en PDF.</value>
+  </data>
+  <data name="LoginRequiredHint" xml:space="preserve">
+    <value>Inicie sesión para acceder a estas opciones.</value>
+  </data>
+  <data name="ExploreOptionsText" xml:space="preserve">
+    <value>Ir</value>
+  </data>
+  <data name="NotFoundTitle" xml:space="preserve">
+    <value>Página no encontrada</value>
+  </data>
+  <data name="NotFoundText" xml:space="preserve">
+    <value>El contenido que busca no existe o fue movido.</value>
+  </data>
 </root>

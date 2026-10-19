@@ -3,6 +3,8 @@
   "dgSpecHash": "BTdr+1Do94E=",
   "success": true,
   "projectFilePath": "D:\\ESTUDIANTES_PRACTICA\\ESTUDIANTES_PRACTICA\\NorthWind\\1. Enterprise Business Rules\\NorthWind.Exceptions.Entities\\NorthWind.Exceptions.Entities.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\northwind.validation.entities\\1.0.0\\northwind.validation.entities.1.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

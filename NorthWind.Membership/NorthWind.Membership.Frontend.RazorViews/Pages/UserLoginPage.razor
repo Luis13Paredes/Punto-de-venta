@@ -1,13 +1,26 @@
 @attribute [Route(RouteTemplate)]
 
-<ErrorBoundary @ref=ErrorBoundaryRef>
-    <ChildContent>
-        <UserLoginComponent ViewModel="ViewModel"/>
-    </ChildContent>
-    <ErrorContent>
-        <ExceptionDisplay Exception="context"/>
-        <button class="btn btn-danger" @onclick=Recover>
-            @CommonMessages.OK
-        </button>
-    </ErrorContent>
-</ErrorBoundary>
+<PageTitle>@CommonMessages.LoginText</PageTitle>
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="auth-brand">NorthWind Sales</div>
+        <h1 class="auth-title">@CommonMessages.LoginText</h1>
+
+        <ErrorBoundary @ref=ErrorBoundaryRef>
+            <ChildContent>
+                <UserLoginComponent ViewModel="ViewModel"/>
+            </ChildContent>
+            <ErrorContent>
+                <ExceptionDisplay Exception="context"/>
+                <button class="btn btn-danger" @onclick=Recover>
+                    @CommonMessages.OK
+                </button>
+            </ErrorContent>
+        </ErrorBoundary>
+
+        <div class="auth-footer">
+            <a href="user/register">@CommonMessages.CreateAccountText &rarr;</a>
+        </div>
+    </div>
+</div>

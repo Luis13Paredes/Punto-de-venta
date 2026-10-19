@@ -2808,7 +2808,7 @@
       ]
     },
     "NorthWind.Membership.Frontend.RazorViews/1.0.0": {
-      "sha512": "5q/SX3E9FbzUSonKevLu4iJv06eeB+l9vXYvz3njOi3DvYh0qAjCcL5lr1wLwRriOEuRIMrf/R/j9Dxuz4+qpw==",
+      "sha512": "8KLifXPmTYUmZY36PDhqTE6eHIv0p6+05OmC40P1kpd798WHq3VD2tOW1joky4ejnZ0wRLqqK3F6ts/Cnvve/g==",
       "type": "package",
       "path": "northwind.membership.frontend.razorviews/1.0.0",
       "files": [

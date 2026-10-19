@@ -3,76 +3,90 @@
 
 <PageTitle>@InvoiceMessages.SearchInvoicesPageTitle</PageTitle>
 
-<h3>@InvoiceMessages.SearchInvoicesHeading</h3>
-
-<div class="invoice-search-bar">
-    <input class="form-control"
-           placeholder="@InvoiceMessages.SearchPlaceholder"
-           @bind=ViewModel.SearchTerm @bind:event="oninput"
-           @onkeyup=HandleKeyUp />
-    <button type="button" class="btn btn-primary"
-            disabled=@IsLoading @onclick=SearchAsync>
-        @InvoiceMessages.SearchButtonText
-    </button>
+<div class="page-header">
+    <h1>@InvoiceMessages.SearchInvoicesHeading</h1>
 </div>
 
-@if (!string.IsNullOrWhiteSpace(ViewModel.ErrorMessage))
-{
-    <div class="alert alert-danger">
-        @ViewModel.ErrorMessage
-    </div>
-}
-
-@if (ViewModel.Result is not null && ViewModel.Result.Items.Count > 0)
-{
-    <table class="table invoice-search-table">
-        <thead>
-            <tr>
-                <th>@InvoiceMessages.InvoiceNumberColumn</th>
-                <th>@InvoiceMessages.DateColumn</th>
-                <th>@InvoiceMessages.CustomerColumn</th>
-                <th>@InvoiceMessages.TotalColumn</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Item in ViewModel.Result.Items)
+<div class="panel">
+    <div class="invoice-search-bar">
+        <input class="form-control"
+               placeholder="@InvoiceMessages.SearchPlaceholder"
+               @bind=ViewModel.SearchTerm @bind:event="oninput"
+               @onkeyup=HandleKeyUp />
+        <button type="button" class="btn btn-primary"
+                disabled=@IsLoading @onclick=SearchAsync>
+            @if (IsLoading)
             {
-                <tr>
-                    <td>@Item.OrderId</td>
-                    <td>@Item.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td>@Item.CustomerName (@Item.CustomerId)</td>
-                    <td>$@Item.Total.ToString("0.00")</td>
-                    <td class="invoice-search-actions">
-                        <button type="button"
-                                class="btn btn-sm btn-outline-primary"
-                                @onclick="() => ViewInvoice(Item.OrderId)">
-                            @InvoiceMessages.ViewButtonText
-                        </button>
-                    </td>
-                </tr>
+                <span class="nw-spinner" aria-hidden="true"></span>
             }
-        </tbody>
-    </table>
-
-    <div class="pagination-bar">
-        <button type="button" class="btn btn-secondary"
-                disabled="@(!ViewModel.CanGoPrevious || IsLoading)"
-                @onclick=PreviousAsync>
-            @InvoiceMessages.PreviousPageText
-        </button>
-        <span class="pagination-page-info">
-            @string.Format(InvoiceMessages.PageInfoTemplate,
-                ViewModel.Result.Page, ViewModel.Result.TotalPages)
-        </span>
-        <button type="button" class="btn btn-secondary"
-                disabled="@(!ViewModel.CanGoNext || IsLoading)"
-                @onclick=NextAsync>
-            @InvoiceMessages.NextPageText
+            @InvoiceMessages.SearchButtonText
         </button>
     </div>
-}
-else if (ViewModel.Result is not null)
-{
-    <div class="invoice-empty">@InvoiceMessages.NoResultsText</div>
-}
+
+    @if (!string.IsNullOrWhiteSpace(ViewModel.ErrorMessage))
+    {
+        <div class="alert alert-danger search-alert" role="alert">
+            @ViewModel.ErrorMessage
+        </div>
+    }
+
+    @if (ViewModel.Result is not null && ViewModel.Result.Items.Count > 0)
+    {
+        <div class="search-results">
+            <table class="table invoice-search-table">
+                <thead>
+                    <tr>
+                        <th>@InvoiceMessages.InvoiceNumberColumn</th>
+                        <th>@InvoiceMessages.DateColumn</th>
+                        <th>@InvoiceMessages.CustomerColumn</th>
+                        <th>@InvoiceMessages.TotalColumn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Item in ViewModel.Result.Items)
+                    {
+                        <tr>
+                            <td>
+                                <span class="invoice-number-badge">
+                                    #@Item.OrderId
+                                </span>
+                            </td>
+                            <td>@Item.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@Item.CustomerName (@Item.CustomerId)</td>
+                            <td><strong>$@Item.Total.ToString("0.00")</strong></td>
+                            <td class="invoice-search-actions">
+                                <button type="button"
+                                        class="btn btn-sm btn-outline-primary"
+                                        @onclick="() => ViewInvoice(Item.OrderId)">
+                                    @InvoiceMessages.ViewButtonText
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="pagination-bar">
+                <button type="button" class="btn btn-outline-secondary"
+                        disabled="@(!ViewModel.CanGoPrevious || IsLoading)"
+                        @onclick=PreviousAsync>
+                    @InvoiceMessages.PreviousPageText
+                </button>
+                <span class="pagination-page-info">
+                    @string.Format(InvoiceMessages.PageInfoTemplate,
+                        ViewModel.Result.Page, ViewModel.Result.TotalPages)
+                </span>
+                <button type="button" class="btn btn-outline-secondary"
+                        disabled="@(!ViewModel.CanGoNext || IsLoading)"
+                        @onclick=NextAsync>
+                    @InvoiceMessages.NextPageText
+                </button>
+            </div>
+        </div>
+    }
+    else if (ViewModel.Result is not null)
+    {
+        <div class="invoice-empty">@InvoiceMessages.NoResultsText</div>
+    }
+</div>

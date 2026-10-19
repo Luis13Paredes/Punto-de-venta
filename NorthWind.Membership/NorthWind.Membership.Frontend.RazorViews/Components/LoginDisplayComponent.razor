@@ -1,15 +1,15 @@
 <AuthorizeView>
     <Authorized>
-        @GetUserName(context)
-        <a href="user/logout">
+        <span class="user-chip">@GetUserName(context)</span>
+        <a class="top-link" href="user/logout">
             @CommonMessages.CloseSessionText
         </a>
     </Authorized>
     <NotAuthorized>
-        <a href="user/register">
+        <a class="top-link" href="user/register">
             @CommonMessages.CreateAccountText
         </a>
-        <a href="user/login">
+        <a class="btn btn-primary btn-sm top-link-cta" href="user/login">
             @CommonMessages.LoginText
         </a>
     </NotAuthorized>

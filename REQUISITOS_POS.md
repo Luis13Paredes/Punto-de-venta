@@ -375,4 +375,86 @@ dotnet ef database update \
 - Verificado: `dotnet build NorthWind.sln` → 0 errores, 0 advertencias;
   WebApi `:5103` y Blazor `:5249` relanzados con los cambios, logs sin errores.
 
+### Mejora de interfaz: estructura, comodidad y usabilidad (2026-10-19)
+
+**Design system (`wwwroot/css/app.css`)**
+- Variables CSS (`--nw-brand`, `--nw-bg`, `--nw-border`, `--nw-radius`,
+  sombras, foco) y base renovada: fondo gris claro, tipografía 15.5 px,
+  botones con radio 8 px y estados hover/active/focus-visibles,
+  controles de 42 px, labels en negrita media, tablas con cabeceras
+  en mayúsculas y filas alternadas/hover, alerts con barra de acento.
+- Paneles (`.panel` con cabecera y barra de acento), `.page-header`,
+  estados vacíos con borde punteado, `.nw-spinner` de carga.
+- Animaciones de entrada para modales (`fade`/`pop`) respetando
+  `prefers-reduced-motion`; utilidades responsive (≤900 px y ≤640 px).
+
+**Layout**
+- Sidebar con marca (cuadro "N" + nombre), menú con indicador activo
+  (barra lateral + fondo), mejor padding y scrollbar; top-bar sticky
+  con borde/sombra sutil; contenido centrado (máx. 1160 px) con
+  padding cómodo; header con **chip de usuario** (punto verde + nombre)
+  y CTA "Iniciar sesión" como botón para anónimos.
+
+**Páginas**
+- **Home:** dashboard de bienvenida (h1 + subtítulo) con tarjetas
+  "Crear orden" / "Facturas" (icono, descripción, "Ir →") y aviso de
+  login para anónimos. Reemplaza el "Hello, world!".
+- **Crear orden:** h1 de página; paneles *Cliente y envío* (grid de
+  campos, 2 columnas) y *Detalle de la orden* (cabecera en mayúsculas,
+  filas como tarjetas, **estado vacío** con guía); footer con acciones
+  a la izquierda, resumen (Subtotal/IVA/Total) y botón **Enviar**
+  destacado; alertas al final del formulario.
+- **Facturas:** h1; buscador + tabla + paginación dentro de un panel;
+  spinner de carga; badges `#N` para el número de factura; totales en
+  negrita.
+- **Factura:** toolbar *← Volver a la búsqueda* arriba; badge de
+  número de factura; bloques Cliente/Enviar a con estilo de tarjeta.
+- **Login / Registro:** tarjeta centrada con marca "NorthWind Sales",
+  título h1, CTA ancho (44 px) y enlace al pie (Crear cuenta ↔ Iniciar
+  sesión). NotFound traducido con retorno al inicio.
+
+**Modales**
+- `SearchModal`: foco automático en el input al abrir.
+- `ConfirmModal`: foco por defecto en **No** (opción segura),
+  ícono de advertencia en el título.
+
+**Recursos (resx + Designer, español)**
+- `CreateOrderMessages`: `ShippingSectionTitle`, `OrderDetailSectionTitle`,
+  `OrderEmptyHintText`.
+- `CommonMessages`: `WelcomeHeading`, `WelcomeSubtitle`,
+  `WelcomeNewOrderText`, `WelcomeInvoicesText`, `LoginRequiredHint`,
+  `ExploreOptionsText`, `NotFoundTitle`, `NotFoundText`.
+
+**Aviso de empaquetado (importante)**
+- `NorthWind.Membership.Frontend.RazorViews` se consume como **paquete
+  NuGet local** (no como `ProjectReference`). Tras editar sus fuentes:
+  `dotnet pack … -o NorthWind.Packages` → borrar
+  `~/.nuget/packages/northwind.membership.frontend.razorviews/1.0.0` →
+  `dotnet build`. Sin este paso los cambios de Login/Registro/Header no
+  se reflejan (seguiría corriendo el paquete anterior).
+
+**Verificación**
+- `dotnet build NorthWind.sln` → **0 errores, 0 advertencias**.
+- Tests Playwright (`test.js`, `test-typing.js`): login OK, precio
+  `65.00` al teclear Id, modal Sí/No correcto, **0 errores de consola**.
+- 17 capturas (desktop + móvil + menú) sin errores de runtime.
+
+**Observación de datos (no es UI):** 17 órdenes anteriores a la Fase 1
+tienen `Subtotal/Tax/Total` en 0 en la BD; la factura 18 muestra
+totales $0.00 pese a tener ítems (el PDF usa los mismos valores
+guardados, así que es consistente). Backfill opcional pendiente de
+decisión.
+
+### Auto-carga de la lista de facturas (2026-10-19)
+
+- `Invoices.razor.cs`: nuevo `OnInitializedAsync` → si el ViewModel
+  aún no tiene resultados (`Result is null`) ejecuta `SearchAsync()`.
+  Al entrar a `/invoices` **ya se muestran las facturas sin pulsar
+  Buscar**; al volver desde el detalle se conserva la lista y el
+  término de búsqueda (sin recargar). Búsqueda manual/Enter/paginación
+  siguen igual.
+- Verificado con Playwright: tabla visible sin clic (5 filas, Página 1
+  de 7), vuelta desde detalle conserva la lista, **0 errores de
+  consola**; `dotnet build` → 0 errores.
+
 ---
