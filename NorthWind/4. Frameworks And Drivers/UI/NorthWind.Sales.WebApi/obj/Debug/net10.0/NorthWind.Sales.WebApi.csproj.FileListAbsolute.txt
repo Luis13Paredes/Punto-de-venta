@@ -229,4 +229,8 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\obj\Debug\net10.0\NorthWind.Sales.WebApi.pdb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\obj\Debug\net10.0\NorthWind.Sales.WebApi.genruntimeconfig.cache
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\obj\Debug\net10.0\ref\NorthWind.Sales.WebApi.dll
-D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Debug\net10.0\publish\linux\appsettings.Development.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Debug\net10.0\publish\linux\appsettings.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Debug\net10.0\publish\linux\NorthWind.Sales.WebApi.deps.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Debug\net10.0\publish\linux\NorthWind.Sales.WebApi.runtimeconfig.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Debug\net10.0\publish\linux\NorthWind.Sales.WebApi.staticwebassets.endpoints.json

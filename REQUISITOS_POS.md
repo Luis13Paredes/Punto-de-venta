@@ -13,7 +13,7 @@ ajustes clave** y el **log de cambios** realizados durante el desarrollo.
 | Decisión | Valor | Detalle |
 |---|---|---|
 | IVA | **15%** | Ecuador, Decreto Ejecutivo 198 (vigente desde 01/abr/2024) |
-| Cédula | **Ecuador, 13 dígitos** | Validación con algoritmo módulo 11 |
+| Cédula | ~~Ecuador, 13 dígitos~~ **ELIMINADA (2026-10-21)** | Se retiró la validación módulo 11; `CustomerId` ahora solo acepta el código legacy de 5 caracteres |
 | Concurrencia | **Optimista (RowVersion)** | Columna `RowVersion` en `Products` (tabla con updates: inventario) |
 | Estrategia | **Por fases** | Fase 1 negocio/API → Fase 2 UI (modales) → Fase 3 factura PDF |
 | Código | **Inglés** | Nombres de código en inglés; textos de usuario en recursos `.resx` (español) |
@@ -49,8 +49,9 @@ Y el texto visible del impuesto:
 - Regex de letras/números: `NorthWind/1. Enterprise Business Rules/NorthWind.Sales.Validators.Entities/CreateOrder/CreateOrderDtoValidator.cs`
 - Mensajes personalizados: `.../Validators.Entities/Resources/CreateOrderMessages.resx`
   (agregar la clave en `.resx` **y** la propiedad en `CreateOrderMessages.Designer.cs`).
-- Cédula ecuatoriana: helper `.../Validators.Entities/CreateOrder/EcuadorianId.cs`
-  (algoritmo módulo 11; cambiar acá si se necesita otro país).
+- ~~Cédula ecuatoriana: helper `.../CreateOrder/EcuadorianId.cs`~~
+  **ELIMINADO (2026-10-21):** se retiró la validación de cédula (módulo 11);
+  `CustomerId` ahora solo valida el código legacy de 5 caracteres.
 
 ### 2.3 Concurrencia optimista (RowVersion)
 
@@ -101,7 +102,7 @@ dotnet ef database update \
 | 3 | Producto no duplicado en orden | ✅ | `OrderAggregate.AddDetail` fusiona repetidos |
 | 4 | Subtotales, IVA y totales | ✅ | `OrderTotals` (IVA 15%), persistido en `Orders` |
 | 5 | Editar solo campos necesarios | ✅ (fase 2 refuerzo) | POS: campos editables; buscador modal evita digitar |
-| 6 | Validaciones (letras/números/blancos/correo/cédula) | ✅ | `CreateOrderDtoValidator` + `EcuadorianId` |
+| 6 | Validaciones (letras/números/blancos/correo/cédula) | ✅ (cédula retirada 2026-10-21) | `CreateOrderDtoValidator` (CustomerId: solo código de 5 caracteres) |
 | 7 | Disminución automática de inventario | ✅ | `CommandsRepository.CreateOrder` descuenta stock |
 | 8 | Mostrar solo productos con stock > 0 | ✅ | `QueriesRepository.SearchProducts` filtra `UnitsInStock > 0` + modal producto |
 | 9 | No vender más que el stock | ✅ | `CreateOrderProductValidator` |
@@ -454,7 +455,38 @@ decisión.
   término de búsqueda (sin recargar). Búsqueda manual/Enter/paginación
   siguen igual.
 - Verificado con Playwright: tabla visible sin clic (5 filas, Página 1
-  de 7), vuelta desde detalle conserva la lista, **0 errores de
+  de 7), vuelva desde detalle conserva la lista, **0 errores de
   consola**; `dotnet build` → 0 errores.
+
+### Limpieza de datos y retiro de validación de cédula (2026-10-21)
+
+**1) Borrado de órdenes con total en 0 (legado pre-Fase 1):**
+- Eliminadas de `NorthWindDB` **17 órdenes** (`Subtotal=0 AND Tax=0
+  AND Total=0`, Ids 1–12 y 14–18) y sus **54 líneas** de `OrderDetails`
+  (transacción SQL; antes 31 órdenes → quedan **14** con totales
+  reales). No afecta Customers/Products ni las BDs de usuarios/logs.
+- Verificado tras el borrado: `SearchInvoices` → `totalCount: 14`,
+  3 páginas.
+
+**2) Eliminación total de la validación de cédula (dígito verificador):**
+- Borrado `Validators.Entities/CreateOrder/EcuadorianId.cs` (algoritmo
+  módulo 11, 13 dígitos).
+- `CreateOrderDtoValidator`: `CustomerId` ahora **solo** valida el
+  código legacy de 5 caracteres (se quitó la rama de cédula).
+- Mensaje `CustomerIdInvalidFormat` (resx) reescrito: *"El identificador
+  debe ser un código de 5 caracteres."* (ya no menciona cédula).
+- Verificado por API: cédula de 13 dígitos → **400** con el nuevo
+  mensaje; `ALFKI` → **200** (orden creada). `dotnet build` → **0
+  errores**. Sin referencias restantes a `EcuadorianId`/cédula en
+  código.
+
+**3) Notificación de órdenes "especiales" (4+ productos) — confirmada:**
+- Existe y está cableada: `SpecialOrderSpecification`
+  (`OrderDetails.Count > 3`) → `CreateOrderInteractor` lanza
+  `SpecialOrderCreatedEvent` → `SendEMailWhenSpecialOrderCreatedEventHandler`
+  → `MailService.SendMailToAdministratorAsync` (asunto + cuerpo con
+  OrderId y cantidad de productos, destino `AdministratorEmail`) vía
+  SMTP **Mailtrap** (`sandbox.smtp.mailtrap.io:2525`, `SmtpOptions` en
+  `appsettings.json`).
 
 ---

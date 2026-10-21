@@ -2,3 +2,5 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Vie
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Views\NorthWind.Sales.Frontend.Views\obj\Debug\net10.0\staticwebassets.build.json
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Views\NorthWind.RazorComponents\obj\Debug\net10.0\staticwebassets.build.json
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Views\NorthWind.Sales.Frontend.Views\obj\Debug\net10.0\staticwebassets.build.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Views\NorthWind.RazorComponents\obj\Debug\net10.0\staticwebassets.build.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\3. Interface Adapters\Views\NorthWind.Sales.Frontend.Views\obj\Debug\net10.0\staticwebassets.build.json

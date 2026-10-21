@@ -10,4 +10,3 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Ru
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Sales.Entities\obj\Debug\net10.0\refint\NorthWind.Sales.Entities.dll
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Sales.Entities\obj\Debug\net10.0\NorthWind.Sales.Entities.pdb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Sales.Entities\obj\Debug\net10.0\ref\NorthWind.Sales.Entities.dll
-D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Sales.Entities\obj\Debug\net10.0\NorthWin.AD1A1099.Up2Date

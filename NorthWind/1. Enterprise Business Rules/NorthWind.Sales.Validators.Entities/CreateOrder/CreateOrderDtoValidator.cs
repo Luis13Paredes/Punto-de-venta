@@ -45,9 +45,7 @@ internal class CreateOrderDtoValidator :
             .SetValidator(detailValidator);
     }
 
-    // Requirement 6: the customer id must be either the 5 character
-    // legacy code or a valid 13 digit Ecuadorian national id number.
+    // Requirement 6: the customer id must be the 5 character legacy code.
     static bool CustomerIdHasValidFormat(string? customerId) =>
-        customerId is not null &&
-        (customerId.Length == 5 || EcuadorianId.IsValid(customerId));
+        customerId is not null && customerId.Length == 5;
 }
