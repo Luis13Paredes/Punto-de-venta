@@ -35,8 +35,14 @@
   <data name="RequiredEmailErrorMessage" xml:space="preserve">
     <value>El correo es requerido.</value>
   </data>
+  <data name="EmailMaximumLengthErrorMessage" xml:space="preserve">
+    <value>El correo no puede exceder 50 caracteres.</value>
+  </data>
   <data name="InvalidEmailErrorMessage" xml:space="preserve">
     <value>El formato de correo no es válido.</value>
+  </data>
+  <data name="InvalidEmailCharactersErrorMessage" xml:space="preserve">
+    <value>El correo solo puede contener letras, números y los caracteres punto (.), guion bajo (_) y arroba (@).</value>
   </data>
   <data name="RequiredPasswordErrorMessage" xml:space="preserve">
     <value>La contraseña es requerida.</value>

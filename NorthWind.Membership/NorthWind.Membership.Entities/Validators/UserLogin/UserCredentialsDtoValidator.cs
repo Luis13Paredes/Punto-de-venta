@@ -8,8 +8,12 @@ internal class UserCredentialsDtoValidator :
         base(validationService)
     {
         AddRuleFor(u => u.Email)
+            .StopOnFirstFailure()
             .NotEmpty(UserLoginMessages.RequiredEmailErrorMessage)
-            .EmailAddress(UserLoginMessages.InvalidEmailErrorMessage);
+            .MaximumLength(UserRegistrationDtoValidator.EmailMaximumLength,
+                UserLoginMessages.EmailMaximumLengthErrorMessage)
+            .Matches(UserRegistrationDtoValidator.EmailPattern,
+                UserLoginMessages.InvalidEmailCharactersErrorMessage);
 
         AddRuleFor(u => u.Password)
             .NotEmpty(UserLoginMessages.RequiredPasswordErrorMessage);

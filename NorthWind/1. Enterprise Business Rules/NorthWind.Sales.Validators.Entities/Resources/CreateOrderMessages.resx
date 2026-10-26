@@ -66,7 +66,7 @@
     <value>Debe proporcionar la dirección de envío.</value>
   </data>
   <data name="ShipAddressMaximumLength" xml:space="preserve">
-    <value>La longitud máxima de la dirección es 60.</value>
+    <value>La longitud máxima de la dirección es 30.</value>
   </data>
   <data name="ShipCityRequired" xml:space="preserve">
     <value>Debe proporcionar la ciudad de envío.</value>
@@ -75,7 +75,7 @@
     <value>Debe especificar al menos 3 caracteres del nombre de la ciudad.</value>
   </data>
   <data name="ShipCityMaximumLength" xml:space="preserve">
-    <value>La longitud máxima de la ciudad es 15.</value>
+    <value>La longitud máxima de la ciudad es 30.</value>
   </data>
   <data name="ShipCountryRequired" xml:space="preserve">
     <value>Debe proporcionar el país de envío.</value>
@@ -84,15 +84,18 @@
     <value>Debe especificar al menos 3 caracteres del nombre del País.</value>
   </data>
   <data name="ShipCountryMaximumLength" xml:space="preserve">
-    <value>La longitud máxima del país es 15.</value>
+    <value>La longitud máxima del país es 30.</value>
   </data>
   <data name="ShipPostalCodeMaximumLength" xml:space="preserve">
-    <value>La longitud máxima del código postal es 10.</value>
+    <value>La longitud máxima del código postal es 6.</value>
   </data>
   <data name="OrderDetailsRequired" xml:space="preserve">
     <value>Debe especificar los productos de la orden.</value>
   </data>
   <data name="OrderDetailsNotEmpty" xml:space="preserve">
     <value>Debe especificar al menos un producto de la orden.</value>
+  </data>
+  <data name="ShipAddressInvalidFormat" xml:space="preserve">
+    <value>La dirección solo puede contener letras, números y los caracteres punto (.), coma (,), almohadilla (#), guion (-) y grado (°).</value>
   </data>
 </root>

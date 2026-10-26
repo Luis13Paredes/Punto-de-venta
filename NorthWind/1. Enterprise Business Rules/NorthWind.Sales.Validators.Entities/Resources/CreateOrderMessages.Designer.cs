@@ -37,6 +37,8 @@ public static class CreateOrderMessages
         ResourceManager.GetString(nameof(ShipAddressRequired), Culture)!;
     public static string ShipAddressMaximumLength =>
         ResourceManager.GetString(nameof(ShipAddressMaximumLength), Culture)!;
+    public static string ShipAddressInvalidFormat =>
+        ResourceManager.GetString(nameof(ShipAddressInvalidFormat), Culture)!;
     public static string ShipCityRequired =>
         ResourceManager.GetString(nameof(ShipCityRequired), Culture)!;
     public static string ShipCityMinimumLength =>

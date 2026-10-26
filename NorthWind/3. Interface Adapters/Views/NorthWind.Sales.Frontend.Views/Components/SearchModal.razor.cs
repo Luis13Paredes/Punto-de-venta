@@ -26,7 +26,15 @@ public partial class SearchModal<TItem>
     [Parameter]
     public string SelectButtonText { get; set; } = string.Empty;
     [Parameter]
-    public Func<string?, int, int, Task<PagedResultDto<TItem>>> OnSearch { get; set; }
+    public bool ShowFilter { get; set; }
+    [Parameter]
+    public string FilterAllText { get; set; } = "Todos";
+    [Parameter]
+    public string FilterIdText { get; set; } = "ID";
+    [Parameter]
+    public string FilterNameText { get; set; } = "Nombre";
+    [Parameter]
+    public Func<string?, string?, int, int, Task<PagedResultDto<TItem>>> OnSearch { get; set; }
         = default!;
     [Parameter]
     public EventCallback<TItem> OnSelect { get; set; }
@@ -34,10 +42,19 @@ public partial class SearchModal<TItem>
     public RenderFragment? HeaderTemplate { get; set; }
     [Parameter]
     public RenderFragment<TItem>? RowTemplate { get; set; }
+    // Optional rule to grey out and block items that cannot be
+    // selected (e.g. a product that is already in the order).
+    [Parameter]
+    public Func<TItem, bool>? ItemBlocked { get; set; }
+    [Parameter]
+    public string BlockedItemTitle { get; set; } = "Ya agregado";
+    [Parameter]
+    public string BlockedItemMark { get; set; } = "—";
 
     public bool IsOpen { get; private set; }
 
     string SearchTerm = string.Empty;
+    string FilterBy = "all";
     int Page = 1;
     bool IsLoading;
     PagedResultDto<TItem>? Result;
@@ -54,12 +71,19 @@ public partial class SearchModal<TItem>
     {
         IsOpen = true;
         SearchTerm = string.Empty;
+        FilterBy = "all";
         Page = 1;
         StateHasChanged();
         await SearchAsync();
     }
 
     public void Close() => IsOpen = false;
+
+    async Task OnFilterChanged()
+    {
+        Page = 1;
+        await SearchAsync();
+    }
 
     async Task SearchAsync()
     {
@@ -70,7 +94,7 @@ public partial class SearchModal<TItem>
         {
             var NewResult = await OnSearch(
                 string.IsNullOrWhiteSpace(SearchTerm) ? null : SearchTerm,
-                Page, PageSize);
+                FilterBy, Page, PageSize);
             if (Version != SearchVersion) return;
             Result = NewResult;
         }
@@ -122,8 +146,12 @@ public partial class SearchModal<TItem>
         await SearchAsync();
     }
 
+    public bool IsBlocked(TItem item) =>
+        ItemBlocked is not null && ItemBlocked(item);
+
     async Task SelectAsync(TItem item)
     {
+        if (IsBlocked(item)) return;
         await OnSelect.InvokeAsync(item);
         Close();
     }

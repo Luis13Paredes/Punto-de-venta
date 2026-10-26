@@ -27,8 +27,9 @@ internal class QueriesRepository(INorthWindSalesQueriesDataContext context) :
     }
 
     // Requirement 15: search customers by id or name with pagination.
+    // filterBy "all"/null searches both; "id" or "name" restricts it.
     public async Task<PagedResultDto<CustomerResultDto>> SearchCustomers(
-        string? searchTerm, int page, int pageSize)
+        string? searchTerm, int page, int pageSize, string? filterBy)
     {
         (page, pageSize) = NormalizePaging(page, pageSize);
 
@@ -37,8 +38,14 @@ internal class QueriesRepository(INorthWindSalesQueriesDataContext context) :
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {
             string Term = searchTerm.Trim();
-            Queryable = Queryable.Where(c =>
-                c.Id.Contains(Term) || c.Name.Contains(Term));
+            string Filter = (filterBy ?? "all").Trim().ToLowerInvariant();
+            Queryable = Filter switch
+            {
+                "id" => Queryable.Where(c => c.Id.Contains(Term)),
+                "name" => Queryable.Where(c => c.Name.Contains(Term)),
+                _ => Queryable.Where(c =>
+                    c.Id.Contains(Term) || c.Name.Contains(Term))
+            };
         }
 
         int TotalCount = await context.CountAsync(Queryable);
@@ -57,8 +64,9 @@ internal class QueriesRepository(INorthWindSalesQueriesDataContext context) :
 
     // Requirement 15 + 8: search products by id or name with
     // pagination, showing only products with stock greater than zero.
+    // filterBy "all"/null searches both; "id" or "name" restricts it.
     public async Task<PagedResultDto<ProductResultDto>> SearchProducts(
-        string? searchTerm, int page, int pageSize)
+        string? searchTerm, int page, int pageSize, string? filterBy)
     {
         (page, pageSize) = NormalizePaging(page, pageSize);
 
@@ -68,9 +76,15 @@ internal class QueriesRepository(INorthWindSalesQueriesDataContext context) :
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {
             string Term = searchTerm.Trim();
-            Queryable = Queryable.Where(p =>
-                p.Name.Contains(Term) ||
-                p.Id.ToString().Contains(Term));
+            string Filter = (filterBy ?? "all").Trim().ToLowerInvariant();
+            Queryable = Filter switch
+            {
+                "id" => Queryable.Where(p => p.Id.ToString().Contains(Term)),
+                "name" => Queryable.Where(p => p.Name.Contains(Term)),
+                _ => Queryable.Where(p =>
+                    p.Name.Contains(Term) ||
+                    p.Id.ToString().Contains(Term))
+            };
         }
 
         int TotalCount = await context.CountAsync(Queryable);

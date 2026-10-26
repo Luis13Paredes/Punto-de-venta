@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NorthWind.Membership.Backend.AspNetIdentity")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a2cbdad0e6684c5eb7922ca12e4b1539c7b292f")]
 [assembly: System.Reflection.AssemblyProductAttribute("NorthWind.Membership.Backend.AspNetIdentity")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NorthWind.Membership.Backend.AspNetIdentity")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

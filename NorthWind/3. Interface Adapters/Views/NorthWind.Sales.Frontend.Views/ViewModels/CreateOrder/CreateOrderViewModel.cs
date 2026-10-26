@@ -21,6 +21,9 @@ public class CreateOrderViewModel(ICreateOrderGateway gateway,
     // Display-only: name of the customer picked in the search modal.
     public string CustomerName { get; set; } = string.Empty;
 
+    // A customer with an outstanding balance cannot create invoices.
+    public bool CustomerHasDebt { get; private set; }
+
     public string InformationMessage { get; private set; } = string.Empty;
     public string ErrorMessage { get; private set; } = string.Empty;
 
@@ -42,14 +45,14 @@ public class CreateOrderViewModel(ICreateOrderGateway gateway,
 
     #region Smart search modals (Requirement 15)
     public Task<PagedResultDto<CustomerResultDto>> SearchCustomers(
-        string? searchTerm, int page, int pageSize) =>
+        string? searchTerm, string? filterBy, int page, int pageSize) =>
         searchCustomersGateway.SearchCustomersAsync(
-            searchTerm, page, pageSize);
+            searchTerm, page, pageSize, filterBy);
 
     public Task<PagedResultDto<ProductResultDto>> SearchProducts(
-        string? searchTerm, int page, int pageSize) =>
+        string? searchTerm, string? filterBy, int page, int pageSize) =>
         searchProductsGateway.SearchProductsAsync(
-            searchTerm, page, pageSize);
+            searchTerm, page, pageSize, filterBy);
 
     // Requirement 5: only the needed data is captured from the modal.
     public void SelectCustomer(CustomerResultDto customer)
@@ -57,6 +60,7 @@ public class CreateOrderViewModel(ICreateOrderGateway gateway,
         ErrorMessage = string.Empty;
         CustomerId = customer.Id;
         CustomerName = customer.Name;
+        CustomerHasDebt = customer.CurrentBalance > 0;
     }
     #endregion
 
@@ -76,11 +80,13 @@ public class CreateOrderViewModel(ICreateOrderGateway gateway,
         {
             ProductId = product.Id,
             UnitPrice = product.UnitPrice,
+            UnitsInStock = product.UnitsInStock,
             Quantity = 1
         });
     }
 
-    // Requirement 11: change a product keeping the rest of the data.
+    // Requirement 11: change a product keeping the rest of the data;
+    // the quantity is cleared so the user enters the new amount.
     public void ReplaceOrderDetailProduct(
         CreateOrderDetailViewModel detail, ProductResultDto product)
     {
@@ -94,6 +100,8 @@ public class CreateOrderViewModel(ICreateOrderGateway gateway,
 
         detail.ProductId = product.Id;
         detail.UnitPrice = product.UnitPrice;
+        detail.UnitsInStock = product.UnitsInStock;
+        detail.Quantity = 0;
     }
 
     // Requirement 10: remove a product before saving the order.
@@ -108,6 +116,26 @@ public class CreateOrderViewModel(ICreateOrderGateway gateway,
     {
         InformationMessage = "";
         ErrorMessage = "";
+
+        // A customer with debt cannot create invoices at all.
+        if (CustomerHasDebt)
+        {
+            ErrorMessage =
+                CreateOrderMessages.CustomerDebtBlockedMessage;
+            return;
+        }
+
+        // The quantity must be positive and cannot exceed the stock.
+        var InvalidDetail = OrderDetails.FirstOrDefault(
+            d => d.ProductId > 0 &&
+                (d.Quantity <= 0 || d.Quantity > d.UnitsInStock));
+        if (InvalidDetail is not null)
+        {
+            ErrorMessage = string.Format(
+                CreateOrderMessages.QuantityExceedsStockMessage,
+                InvalidDetail.ProductId);
+            return;
+        }
 
         // Requirement: an order cannot contain the same product twice.
         var DuplicatedIds = OrderDetails

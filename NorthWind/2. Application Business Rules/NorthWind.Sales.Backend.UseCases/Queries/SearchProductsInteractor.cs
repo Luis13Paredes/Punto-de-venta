@@ -5,10 +5,11 @@ internal class SearchProductsInteractor(
     IUserService userService) : ISearchProductsInputPort
 {
     public Task<PagedResultDto<ProductResultDto>> Handle(
-        string? searchTerm, int page, int pageSize)
+        string? searchTerm, int page, int pageSize, string? filterBy)
     {
         GuardUser.AgainstUnauthenticated(userService);
 
-        return repository.SearchProducts(searchTerm, page, pageSize);
+        return repository.SearchProducts(
+            searchTerm, page, pageSize, filterBy);
     }
 }

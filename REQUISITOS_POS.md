@@ -489,4 +489,289 @@ decisión.
   SMTP **Mailtrap** (`sandbox.smtp.mailtrap.io:2525`, `SmtpOptions` en
   `appsettings.json`).
 
+### Fix Linux: CreateOrder 500 con PlatformNotSupportedException (2026-10-21)
+
+**Síntoma (VM Debian, API en `192.168.83.129:5000`):** `POST /CreateOrder`
+→ **500** *"El servicio no se encuentra disponible. Consulte al
+administrador."*; el campo `instance` del ProblemDetails reveló
+**`ProblemDetails/System.PlatformNotSupportedException`**.
+
+**Causa:** `NorthWind.Transactions.Entities/Services/DomainTransaction.cs`
+usaba `System.Transactions.TransactionScope` con
+`TransactionManager.ImplicitDistributedTransactions = true`. Al crear
+una orden participan **dos conexiones SQL** (NorthWindDB para la orden
++ NorthWindLogsDB del `domainLogger` dentro del scope) → SqlClient
+**promueve a transacción distribuida (MSDTC)**. Windows tiene MSDTC;
+**Linux no** → `PlatformNotSupportedException`. (Login/SearchInvoices
+no usaban transacción, por eso funcionaban.)
+
+**Fix (portable Windows/Linux):**
+- Nueva clase `EFCoreDomainTransaction`
+  (`DataContexts.EFCore/Services/`): transacción **local de EF Core**
+  (`dbContext.Database.BeginTransaction()`) sobre el mismo
+  `NorthWindSalesCommandsDataContext` (scoped) que usa el repositorio
+  → Orders + OrderDetails + Products atómicos, sin MSDTC.
+- Eliminada `DomainTransaction.cs` (TransactionScope) y su registro
+  `AddTransactionServices()`; `IDomainTransaction` se registra ahora en
+  `AddDataContexts()` (Scoped). `Transactions.Entities` queda solo con
+  la interfaz.
+- Nota de comportamiento: los logs de auditoría (NorthWindLogsDB) ya no
+  participan en la transacción; un rollback de orden no los revierte.
+
+**Verificado:** `dotnet build` → 0 errores; CreateOrder local → **200**
+(orden #34: Subtotal 350 / IVA 52.50 / Total 402.50, stock descontado
+en la misma transacción; orden de prueba eliminada y stock restaurado).
+
+**Para la VM (Debian):** republicar la API (Paso 2 de la guía:
+`dotnet publish ... -r linux-x64 --self-contained -o publish/linux`),
+copiar a `/opt/northwind-api` **preservando el `appsettings.json` de la
+VM** (SQL auth) y `sudo systemctl restart northwind-api`.
+
+### Fix correo: puerto SMTP 2525 bloqueado → 587 (2026-10-21)
+
+**Síntoma:** la notificación de órdenes especiales (4+ productos) no
+llegaba a Mailtrap; con 4+ productos la creación colgaba ~60-100 s y
+fallaba (rollback) — `journalctl` mostraba excepción en
+`SmtpClient.SendMailAsync` / `DnsConnectAsync`.
+
+**Diagnóstico:** la red **bloquea el puerto saliente 2525** (comprobado:
+TCP a 2525 = no conecta; **587 y 465 = conectan**; banner `220
+smtp.mailtrap.io ESMTP ready` en 587). Host y credenciales de Mailtrap
+correctos; solo el puerto.
+
+**Fix:** `appsettings.json` → `SmtpOptions.SmtpPort` y `SmtpHostPort`
+**2525 → 587** (STARTTLS, puerto estándar de envío; `EnableSsl=true` en
+`MailService` es compatible). En la VM: editar
+`/opt/backend/appsettings.json` (o respaldar/editar tras republicar) y
+`sudo systemctl restart backend`.
+
 ---
+
+### Reposición de stock e inserción de productos en la VM (2026-10-22)
+
+**Contexto:** tras las pruebas en la VM el stock quedó bajo/Agotado y
+el usuario quería más productos de prueba.
+
+**Acceso a la base de la VM:** el SQL Server de la VM (Docker) corre en
+`192.168.83.129:1433` y es alcanzable desde el host; usa autenticación
+SQL (`sa`). Las credenciales reales NO están en `appsettings.json`
+(que conserva la cadena local de Windows, Trusted_Connection) sino en
+`/opt/backend/appsettings.Production.json` — ese archivo es el que el
+servicio carga realmente en modo Production. Conexión desde el host:
+`sqlcmd -S '192.168.83.129,1433' -U sa -P '<password>' -C -d NorthWindDB`.
+
+**Ejecutado (transacción, NorthWindDB de la VM):**
+- `UPDATE Products SET UnitsInStock = 50 WHERE UnitsInStock < 20`
+  (Chai, Chang, Aniseed Syrup, Chef Anton's Gumbo Mix → 50).
+- `INSERT` de 10 productos nuevos (Id identity, arranca en 6):
+  Grandma's Boysenberry Spread (25.00/60), Uncle Bob's Organic Dried
+  Pears (30.00/55), Northwoods Cranberry Sauce (40.00/70), Queso
+  Cabrales (21.00/45), Queso Manchego La Pastora (38.00/35), Konbu
+  (12.00/80), Tofu (18.50/65), Genen Shouyu (15.50/50), Ikura
+  (85.00/25), Mishi Kobe Niku (99.00/15).
+
+**Verificado:** `GET /SearchProducts?search=&page=1&pageSize=20` con
+token de `pos.test@example.com` → `totalCount: 15` y los 15 productos
+con stock > 0 (el buscador del POS solo lista stock > 0, requisito 8),
+precios y stock coincidentes con la base.
+
+**Nota:** el esquema de Products es `Id (int identity), Name
+(nvarchar(40) required), UnitsInStock (smallint), UnitPrice
+(decimal(8,2)), RowVersion (rowversion auto)`.
+
+### Validaciones de registro e inicio de sesión (2026-10-22)
+
+**Requisitos:** nombres/apellidos máx. 25 caracteres, solo letras y
+espacios (sin números ni caracteres especiales); correo con máximo 100
+caracteres y solo letras, números y los caracteres `.`, `_` y `@`,
+tanto al registrar como al iniciar sesión.
+
+**Dónde vive la lógica:** los validadores de
+`NorthWind.Membership.Entities` (`UserRegistrationDtoValidator` y
+`UserCredentialsDtoValidator`) se registran vía `AddMembershipValidators()`
+y se ejecutan en el backend (WebApi) Y en Blazor (el formulario reutiliza
+los mismos DTO validators en el navegador). Un solo cambio cubre ambos.
+
+**Cambios:**
+- `UserRegistrationDtoValidator`: FirstName/LastName con
+  `StopOnFirstFailure + NotEmpty + MaximumLength(25) + Matches(@"^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]+$")`;
+  Email con `NotEmpty + MaximumLength(100) + Matches(@"^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")`
+  (reemplaza `EmailAddress` genérico; el guion se permite solo en el
+  dominio por ser estándar en DNS).
+- `UserCredentialsDtoValidator` (login): mismas reglas de correo
+  (largo + formato). El presenter de login envuelve los errores en el
+  mensaje genérico "El correo o la contraseña son incorrectos." más el
+  detalle del campo (no revela si el usuario existe).
+- Mensajes nuevos en `UserRegistrationMessages`/`UserLoginMessages`
+  (resx + Designer): FirstName/LastName MaximumLength e InvalidFormat,
+  Email MaximumLength e InvalidEmailCharacters.
+- Componentes `UserRegistrationComponent.razor` y
+  `UserLoginComponent.razor`: atributos `maxlength="25"` (nombres) y
+  `maxlength="100"` (correo) en los `InputText`.
+
+**Empaquetado:** como Membership se consume como NuGet local, se
+repaquetaron a `NorthWind.Packages` (versión 1.0.0, sobreescrita) y se
+limpió la caché de `~/.nuget/packages` para:
+- `NorthWind.Validation.Entities` (el nupkg estaba desactualizado: el
+  `Matches` del framework existía en el fuente pero no en el paquete).
+- `NorthWind.Membership.Entities` (validadores + mensajes).
+- `NorthWind.Membership.Frontend.RazorViews` (maxlength).
+
+**Verificado (local :5999 y VM :5000):** 6 casos de registro inválido →
+400 con mensaje específico (número en nombre, carácter especial, número
+en apellido, nombre >25, email con `+`, email >100); registro válido
+("María José" / "González", acentos y espacio) → 200; login existente
+`pos.test@example.com` → 200 (sin regresión); login con email >100 →
+400 con "El correo no puede exceder 100 caracteres.".
+
+**Despliegue VM:** backup en `/opt/backend.bak-val20261022125612`,
+410 archivos + satélites de cultura copiados preservando
+`appsettings*.json` (incluye el `appsettings.Production.json` real),
+`systemctl restart backend` → active. Usuarios de prueba eliminados de
+las bases locales y de la VM.
+
+**Nota Blazor:** para ver los `maxlength` y mensajes del lado del
+formulario, reconstruir la solución en Visual Studio (la caché de
+paquetes NuGet ya quedó limpia; al compilar restaura los 1.0.0 nuevos).
+
+**Actualización (mismo día): límite de correo 100 → 50.** Ajustada la
+constante `EmailMaximumLength` a 50, mensajes resx
+("El correo no puede exceder 50 caracteres.") y `maxlength="50"` en los
+inputs de registro y login. Repack de `NorthWind.Membership.Entities` y
+`NorthWind.Membership.Frontend.RazorViews`, cachés limpias, republicado
+y desplegado a la VM (backup `/opt/backend.bak-val5020261022222926`).
+Nota: durante el despliegue la VM se reinició y el backend dio timeouts
+transitorios hacia SQL (base aún arrancando); tras estabilizarse se
+verificó en la VM: correo 51 chars → **400** "El correo no puede exceder
+50 caracteres."; correo 50 chars → **200**; login `pos.test` → **200**.
+Usuario de prueba eliminado.
+
+**Bloqueo de caracteres al teclear (mismo día).** Además de las
+validaciones al enviar, el formulario ahora **impide teclear** los
+caracteres no permitidos: en `UserRegistrationComponent` y
+`UserLoginComponent` los inputs de Nombre/Apellidos/Correo llevan un
+`onkeydown` (JS inline) que hace `event.preventDefault()` si el
+carácter no está en la lista blanca (letras con acentos y espacio para
+nombres; letras, números y `. _ @ -` para el correo), y un
+`@bind-Value:after` que sanea el valor con la nueva clase
+`InputFilters` (cubre pegado/autocompletado). Repack de
+`NorthWind.Membership.Frontend.RazorViews` + caché limpia; la app
+Blazor compiló con 0 errores. Verificado con Playwright tecleando
+"Juan123'{}+!" → el campo queda "Juan"; "Gonz@lez123#" → "Gonzlez";
+"user+tag@mail!com" → "usertag@mailcom"; "María José" se conserva
+completo. Nota técnica: en componentes Blazor el valor del atributo
+`onkeydown` debe escribirse como expresión C# de cadena
+(`@("js...")`), no como HTML crudo.
+
+### Lote POS: filtros de búsqueda, controles de factura y validaciones (2026-10-23)
+
+**1. Búsqueda segmentada Todos/ID/Nombre (backend + frontend).**
+Parámetro `filterBy` ("all"/"id"/"name") agregado a toda la cadena de
+`SearchCustomers` y `SearchProducts`: controllers, input ports,
+interactors, `IQueriesRepository`, `QueriesRepository` (switch sobre
+`Contains` de id o nombre), gateways frontend (query string) y
+`SearchModal` (dropdown en la toolbar, visible con `ShowFilter=true`;
+resetea a "all" al abrir). Verificado en la VM: clientes "A" →
+all=5 / id=3 / name=5; productos "3" → all=2 / id=2 / name=0.
+
+**2. Validaciones de envío (CreateOrderDtoValidator).**
+Dirección: máx. 30 (era 60) + formato `^[A-Za-zÁÉÍÓÚÜáéíóúüñÑ0-9 .,#°/-]+$`
+(nuevo mensaje ShipAddressInvalidFormat). Ciudad y país: máx. 30 (era
+15), solo letras (ya existía). Código postal: máx. 6 (era 10), solo
+dígitos (ya existía). Cadenas de longitud actualizadas en el resx.
+Verificado en la VM: dirección >30 → 400 "La longitud máxima de la
+dirección es 30."; dirección con `$` → 400 mensaje de formato; ciudad
+con números → 400; postal 7 dígitos → 400; postal con letras → 400;
+orden válida → 200.
+
+**3. Dominios de correo reforzados (Membership).**
+Nuevo `EmailPattern` (registro y login comparten el validador):
+`^[a-zA-Z0-9._]+@([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$`
+— etiquetas de dominio deben empezar/terminar con alfanumérico,
+guiones solo internos, TLD ≥2 letras. Rechaza `mail..com`,
+`-mail.com`, `user@localhost`, etc. Repack de Entities (+ RazorViews
+por los nuevos filtros) y cachés limpias. Verificado en la VM.
+
+**4. Pantalla Crear Orden (frontend).**
+- CustomerId: textbox `disabled` + maxlength 5; solo se llena con el
+  botón Buscar cliente (modal).
+- Dirección/ciudad/país/postal: `disabled` si el cliente tiene deuda,
+  maxlength 30/30/30/6, bloqueo de caracteres al teclear (onkeydown)
+  y saneado al pegar (`@bind-Value:after` + `InputFilters`
+  .FilterAddress/.FilterName/.FilterDigits).
+- Cliente con deuda (`CurrentBalance > 0`): alerta "El cliente tiene
+  deuda pendiente…", campos de envío y cantidad deshabilitados,
+  botones Buscar producto/Cambiar/Enviar deshabilitados (Buscar
+  cliente queda habilitado para poder cambiar de cliente).
+- Filas de detalle: ProductId e UnitPrice deshabilitados (solo se
+  cargan desde el buscador); label "Stock: N" bajo la cantidad;
+  aviso inline si la cantidad supera el stock; el envío valida
+  cantidad >0 y ≤ stock por fila.
+- Botón "Cambiar": al reemplazar el producto se limpia la cantidad y
+  se actualizan precio y stock.
+- Botón "Agregar producto" eliminado (el buscador agrega directo al
+  seleccionar). Texto del hint vacío actualizado.
+- Mensajes nuevos en Views/CreateOrderMessages: FilterAllText,
+  FilterIdText, FilterNameText, StockLabel,
+  CustomerDebtBlockedMessage, QuantityExceedsStockMessage.
+
+**Pipeline:** WebApi y Frontend.Views compilan con 0 errores; paquetes
+Membership repackeados; backend desplegado a la VM preservando
+appsettings (backup `/opt/backend.bak-batch20261023091040`); orden de
+prueba #51 y usuarios de prueba eliminados.
+
+### Ajustes: barra (/) fuera de la dirección y correo sin nada después del TLD (2026-10-23)
+
+**1. Barra `/` eliminada de la dirección de envío.**
+- Backend: regex de `ShipAddress` ahora es
+  `^[A-Za-zÁÉÍÓÚÜáéíóúüñÑ0-9 .,#°-]+$` (sin `/`); mensaje
+  ShipAddressInvalidFormat actualizado (ya no menciona la barra).
+- Frontend: `InputFilters.AddressAllowedChars` y el `onkeydown` del
+  campo Dirección en `CreateOrderComponent` sin `/`.
+- Verificado: VM `Calle 12/34 # 56` → 400 con el nuevo mensaje;
+  `Calle 12 # 45-67 °` → 200. Playwright: al teclear `Calle/ 12#`
+  queda `Calle 12#`; `°` sí se permite. (Nota: el `°`/acentos deben
+  probarse con `--data-binary @archivo` — el git-bash de Windows
+  malcodifica variables UTF-8 en `curl -d` y simula un 400 vacío del
+  HTTP layer, que NO es un bug del backend.)
+
+**2. Correo: nada después del dominio (TLD).**
+- Al teclear (`onkeydown` en registro y login): si el dominio ya está
+  completo (etiquetas + TLD de ≥2 letras), se bloquea el punto —
+  `example@mail.com.` escribe como `example@mail.com`; las letras
+  siguen permitidas mientras se forma el TLD (`user@mail.co` + `m` →
+  `user@mail.com`).
+- Al pegar/autocompletar (`InputFilters.FilterEmail`): se recortan
+  los puntos finales tras un dominio completo
+  (`example@mail.com.` → `example@mail.com`).
+- El backend ya rechazaba estructuras inválidas (punto final,
+  `mail..com`, `-mail.com`, sin TLD) con el patrón reforzado.
+- Verificado con Playwright: 3/3 casos de tecleo OK; VM registro
+  `example@mail.com.` → 400, `example@mail.com` → 200 (usuario
+  eliminado tras la prueba).
+
+**Pipeline:** RazorViews repackeado; WebApi y Frontend.Views 0
+errores; desplegado a la VM (backup `/opt/backend.bak-fix20261023095522`);
+órdenes de prueba (51, 54-56) eliminadas. Nota: la ruta del POS es
+`/createorder` (no `/create-order`).
+
+### Modal de productos: bloqueo de productos ya agregados (2026-10-23)
+
+En la pantalla Crear Orden, al reabrir el modal "Buscar producto",
+los productos que ya están en la orden aparecen bloqueados: fila
+atenuada (opacity 0.55, cursor not-allowed), marca "Agregado" en la
+columna de selección, tooltip "Ya agregado a la orden" y el click no
+selecciona (el modal permanece abierto, sin duplicados).
+
+Implementación: parámetro genérico opcional `ItemBlocked`
+(`Func<TItem,bool>`) + `BlockedItemTitle`/`BlockedItemMark` en
+`SearchModal` (guard en `SelectAsync`); `CreateOrderComponent` lo
+alimenta con `Order.OrderDetails.Any(d => d.ProductId == p.Id)`.
+CSS `.search-modal-row-blocked` / `.search-modal-select-blocked` en
+`app.css`. Mensajes `AlreadyAddedText`/`AlreadyAddedMark` en
+CreateOrderMessages. Cambio solo de frontend (sin deploy a la VM).
+
+Verificado con Playwright (Blazor :5249): agregar producto 1 → 1 fila
+de detalle; reabrir modal → 1 fila bloqueada, click no agrega ni
+cierra; agregar producto 2 → 2 filas; reabrir → 2 bloqueadas con marca
+"Agregado".

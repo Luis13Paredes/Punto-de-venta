@@ -14,3 +14,4 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind.Membership\NorthWind.Memb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind.Membership\NorthWind.Membership.Backend.AspNetIdentity\obj\Debug\net10.0\NorthWind.Membership.Backend.AspNetIdentity.pdb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind.Membership\NorthWind.Membership.Backend.AspNetIdentity\obj\Debug\net10.0\NorthWind.Membership.Backend.AspNetIdentity.genruntimeconfig.cache
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind.Membership\NorthWind.Membership.Backend.AspNetIdentity\obj\Debug\net10.0\ref\NorthWind.Membership.Backend.AspNetIdentity.dll
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind.Membership\NorthWind.Membership.Backend.AspNetIdentity\obj\Debug\net10.0\NorthWind.Membership.Backend.AspNetIdentity.sourcelink.json

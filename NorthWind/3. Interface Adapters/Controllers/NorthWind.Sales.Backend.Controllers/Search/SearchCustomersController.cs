@@ -12,8 +12,8 @@ public static class SearchCustomersController
     }
 
     public static async Task<PagedResultDto<CustomerResultDto>> Search(
-        string? search, int? page, int? pageSize,
+        string? search, int? page, int? pageSize, string? filterBy,
         ISearchCustomersInputPort inputPort) =>
         await inputPort.Handle(
-            search, page ?? 1, pageSize ?? 5);
+            search, page ?? 1, pageSize ?? 5, filterBy);
 }

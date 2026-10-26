@@ -11,7 +11,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "10.0.12",
           "Microsoft.EntityFrameworkCore.Tools": "10.0.12",
           "NorthWind.Exceptions.Entities": "1.0.0",
-          "NorthWind.Sales.Backend.Repositories": "1.0.0"
+          "NorthWind.Sales.Backend.Repositories": "1.0.0",
+          "NorthWind.Transactions.Entities": "1.0.0"
         },
         "runtime": {
           "NorthWind.Sales.Backend.DataContexts.EFCore.dll": {}

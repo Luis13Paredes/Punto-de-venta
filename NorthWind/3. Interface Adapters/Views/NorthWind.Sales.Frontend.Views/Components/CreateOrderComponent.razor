@@ -9,6 +9,13 @@
             </h2>
         </div>
 
+        @if (Order.CustomerHasDebt)
+        {
+            <div class="alert alert-danger" role="alert">
+                @CreateOrderMessages.CustomerDebtBlockedMessage
+            </div>
+        }
+
         <div class="form-grid">
             <div class="form-group span-2">
                 <label for="customerId">
@@ -17,6 +24,8 @@
                 <div class="input-group">
                     <InputText
                         class="form-control" id="customerId"
+                        maxlength="5"
+                        disabled="disabled"
                         placeholder="@CreateOrderMessages.CustomerIdLabel"
                         @bind-Value=Order.CustomerId/>
                     <button type="button" class="btn btn-outline-primary"
@@ -38,8 +47,12 @@
                 </label>
                 <InputText
                     class="form-control" id="shipAddress"
+                    maxlength="30"
+                    disabled=@Order.CustomerHasDebt
+                    onkeydown="@("if(event.key.length===1&&!/[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9 .,#°-]/.test(event.key))event.preventDefault()")"
                     placeholder="@CreateOrderMessages.ShipAddressLabel"
-                    @bind-Value=Order.ShipAddress />
+                    @bind-Value=Order.ShipAddress
+                    @bind-Value:after="SanitizeShipAddress" />
                 <ValidationMessage For="() => Order.ShipAddress"/>
             </div>
             <div class="form-group">
@@ -48,8 +61,12 @@
                 </label>
                 <InputText
                     class="form-control" id="shipCity"
+                    maxlength="30"
+                    disabled=@Order.CustomerHasDebt
+                    onkeydown="@("if(event.key.length===1&&!/[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/.test(event.key))event.preventDefault()")"
                     placeholder="@CreateOrderMessages.ShipCityLabel"
-                    @bind-Value=Order.ShipCity />
+                    @bind-Value=Order.ShipCity
+                    @bind-Value:after="SanitizeShipCity" />
                 <ValidationMessage For="() => Order.ShipCity"/>
             </div>
             <div class="form-group">
@@ -58,8 +75,12 @@
                 </label>
                 <InputText
                     class="form-control" id="shipCountry"
+                    maxlength="30"
+                    disabled=@Order.CustomerHasDebt
+                    onkeydown="@("if(event.key.length===1&&!/[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/.test(event.key))event.preventDefault()")"
                     placeholder="@CreateOrderMessages.ShipCountryLabel"
-                    @bind-Value=Order.ShipCountry />
+                    @bind-Value=Order.ShipCountry
+                    @bind-Value:after="SanitizeShipCountry" />
                 <ValidationMessage For="() => Order.ShipCountry"/>
             </div>
             <div class="form-group">
@@ -68,8 +89,12 @@
                 </label>
                 <InputText
                     class="form-control" id="shipPostalCode"
+                    maxlength="6"
+                    disabled=@Order.CustomerHasDebt
+                    onkeydown="@("if(event.key.length===1&&!/[0-9]/.test(event.key))event.preventDefault()")"
                     placeholder="@CreateOrderMessages.ShipPostalCodeLabel"
-                    @bind-Value=Order.ShipPostalCode />
+                    @bind-Value=Order.ShipPostalCode
+                    @bind-Value:after="SanitizeShipPostalCode" />
                 <ValidationMessage For="() => Order.ShipPostalCode"/>
             </div>
         </div>
@@ -100,10 +125,9 @@
                         <div>
                             <InputNumber
                                 class="form-control"
+                                disabled="disabled"
                                 placeholder="@CreateOrderMessages.ProductIdLabel"
-                                @bind-Value="Item.ProductId"
-                                @bind-Value:after="() => OnProductIdChanged(Item)"
-                                @oninput="(e) => OnProductIdInput(e, Item)" />
+                                @bind-Value="Item.ProductId" />
                             <ValidationMessage For="() => Item.ProductId"/>
                         </div>
                         <div>
@@ -117,13 +141,27 @@
                         <div>
                             <InputNumber
                                 class="form-control"
+                                disabled=@Order.CustomerHasDebt
                                 placeholder="@CreateOrderMessages.QuantityLabel"
                                 @bind-Value="Item.Quantity" />
+                            <small class="stock-hint">
+                                @CreateOrderMessages.StockLabel: @Item.UnitsInStock
+                            </small>
+                            @if (Item.ProductId > 0 &&
+                                Item.Quantity > Item.UnitsInStock)
+                            {
+                                <div class="validation-message">
+                                    @string.Format(
+                                        CreateOrderMessages.QuantityExceedsStockMessage,
+                                        Item.ProductId)
+                                </div>
+                            }
                             <ValidationMessage For="() => Item.Quantity"/>
                         </div>
                         <div class="order-row-actions">
                             <button type="button"
                                     class="btn btn-sm btn-outline-primary"
+                                    disabled=@Order.CustomerHasDebt
                                     @onclick="() => ChangeProduct(ItemIndex)">
                                 @CreateOrderMessages.ChangeProductButtonText
                             </button>
@@ -147,23 +185,20 @@
         <div class="order-footer">
             <div class="order-actions">
                 <button type="button" class="btn btn-outline-primary"
+                        disabled=@Order.CustomerHasDebt
                         @onclick=OpenProductSearch>
                     @CreateOrderMessages.SearchProductButtonText
-                </button>
-                <button type="button" class="btn btn-secondary"
-                        @onclick=Order.AddNewOrderDetailItem>
-                    @CreateOrderMessages.AddProductButtonText
                 </button>
             </div>
 
             <div class="order-summary">
                 <div class="summary-row">
                     <span>@CreateOrderMessages.SubtotalLabel</span>
-                    <span>$@Order.Subtotal.ToString("0.00")</span>
+                    <span>@Order.Subtotal.ToString("0.00")</span>
                 </div>
                 <div class="summary-row">
                     <span>@CreateOrderMessages.TaxLabel</span>
-                    <span>$@Order.TaxAmount.ToString("0.00")</span>
+                    <span>@Order.TaxAmount.ToString("0.00")</span>
                 </div>
                 <div class="summary-row summary-total">
                     <span>@CreateOrderMessages.TotalLabel</span>
@@ -172,7 +207,8 @@
             </div>
 
             <div class="order-submit">
-                <button class="btn btn-primary btn-lg">
+                <button class="btn btn-primary btn-lg"
+                        disabled=@Order.CustomerHasDebt>
                     @CreateOrderMessages.SendButtonText
                 </button>
             </div>
@@ -209,6 +245,10 @@
     NextPageText="@CreateOrderMessages.NextPageText"
     PageInfoTemplate="@CreateOrderMessages.PageInfoTemplate"
     SelectButtonText="@CreateOrderMessages.SelectButtonText"
+    ShowFilter=true
+    FilterAllText="@CreateOrderMessages.FilterAllText"
+    FilterIdText="@CreateOrderMessages.FilterIdText"
+    FilterNameText="@CreateOrderMessages.FilterNameText"
     OnSearch="Order.SearchCustomers"
     OnSelect="Order.SelectCustomer">
     <HeaderTemplate>
@@ -233,8 +273,15 @@
     NextPageText="@CreateOrderMessages.NextPageText"
     PageInfoTemplate="@CreateOrderMessages.PageInfoTemplate"
     SelectButtonText="@CreateOrderMessages.SelectButtonText"
+    ShowFilter=true
+    FilterAllText="@CreateOrderMessages.FilterAllText"
+    FilterIdText="@CreateOrderMessages.FilterIdText"
+    FilterNameText="@CreateOrderMessages.FilterNameText"
     OnSearch="Order.SearchProducts"
-    OnSelect="OnProductSelected">
+    OnSelect="OnProductSelected"
+    ItemBlocked="@(p => Order.OrderDetails.Any(d => d.ProductId == p.Id))"
+    BlockedItemTitle="@CreateOrderMessages.AlreadyAddedText"
+    BlockedItemMark="@CreateOrderMessages.AlreadyAddedMark">
     <HeaderTemplate>
         <th>@CreateOrderMessages.ProductIdColumn</th>
         <th>@CreateOrderMessages.ProductNameColumn</th>

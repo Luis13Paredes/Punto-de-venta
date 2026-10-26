@@ -854,6 +854,26 @@ a, .btn-link {
     color: #fff;
 }
 
+.search-modal-row-blocked {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+    .search-modal-row-blocked:hover {
+        background-color: transparent;
+    }
+
+.search-modal-select-blocked {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border: 1px dashed var(--nw-muted);
+    border-radius: 6px;
+    color: var(--nw-muted);
+    font-weight: 600;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
 .search-modal-empty {
     text-align: center;
     color: var(--nw-muted);

@@ -11,3 +11,4 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Ru
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Events.Entities\obj\Debug\net10.0\refint\NorthWind.Events.Entities.dll
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Events.Entities\obj\Debug\net10.0\NorthWind.Events.Entities.pdb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Events.Entities\obj\Debug\net10.0\ref\NorthWind.Events.Entities.dll
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\1. Enterprise Business Rules\NorthWind.Events.Entities\obj\Debug\net10.0\NorthWin.42602CFC.Up2Date

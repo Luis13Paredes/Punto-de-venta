@@ -531,3 +531,8 @@ D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\obj\Release\net10.0\linux-x64\NorthWind.Sales.WebApi.pdb
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\obj\Release\net10.0\linux-x64\NorthWind.Sales.WebApi.genruntimeconfig.cache
 D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\obj\Release\net10.0\linux-x64\ref\NorthWind.Sales.WebApi.dll
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Release\net10.0\linux-x64\publish\linux\appsettings.Development.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Release\net10.0\linux-x64\publish\linux\appsettings.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Release\net10.0\linux-x64\publish\linux\NorthWind.Sales.WebApi.deps.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Release\net10.0\linux-x64\publish\linux\NorthWind.Sales.WebApi.runtimeconfig.json
+D:\ESTUDIANTES_PRACTICA\ESTUDIANTES_PRACTICA\NorthWind\4. Frameworks And Drivers\UI\NorthWind.Sales.WebApi\bin\Release\net10.0\linux-x64\publish\linux\NorthWind.Sales.WebApi.staticwebassets.endpoints.json

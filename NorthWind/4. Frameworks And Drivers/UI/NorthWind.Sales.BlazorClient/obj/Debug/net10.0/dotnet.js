@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "NorthWind.Sales.BlazorClient",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-QLh9pIYZW7j9RePoW5tHGSFPVSlN2t3Dpk/eYl8g3OE=",
+    "hash": "sha256-L+rakVtqkDqq1bCcPaoWpVLWcNxrfodXON7b0BTIBec=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.b6l13xorvf.js"
@@ -258,14 +258,14 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "NorthWind.Membership.Entities.wasm",
-        "name": "NorthWind.Membership.Entities.61w65gwdvo.wasm",
-        "hash": "sha256-qoz51vC1DJI0O8iORgY6k3UznkOH1mRNyVWgi1w7XEk=",
+        "name": "NorthWind.Membership.Entities.vqidbusnxf.wasm",
+        "hash": "sha256-J0NdqQWxohZBp10mEbxDVeEWFnEvJnQEQM/D9J+ZNPY=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Membership.Frontend.RazorViews.wasm",
-        "name": "NorthWind.Membership.Frontend.RazorViews.ml1qme0z1t.wasm",
-        "hash": "sha256-Zuf8lr796HjDsrP/nClEHuCY48lCsOGu79kd5OxOGLc=",
+        "name": "NorthWind.Membership.Frontend.RazorViews.csojciv0ve.wasm",
+        "hash": "sha256-xPekAvE7GeCmiLi5ooBH1Xszg8tTKEWs89mnGVPsD7k=",
         "cache": "force-cache"
       },
       {
@@ -1290,62 +1290,62 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "NorthWind.HttpDelegatingHandlers.wasm",
-        "name": "NorthWind.HttpDelegatingHandlers.73k3bq18jw.wasm",
-        "hash": "sha256-cyuVvV2SqdAgtnqit8sES+HPysPtzhnONTe8lMwZpPY=",
+        "name": "NorthWind.HttpDelegatingHandlers.02va8wjt1y.wasm",
+        "hash": "sha256-uLMNcz9xvxpPvaZOjUU5SnuZV/FquFmQa/Xcz/euK4k=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.RazorComponents.wasm",
-        "name": "NorthWind.RazorComponents.qcuehy3m96.wasm",
-        "hash": "sha256-KrqfPiTOC7xIS4KhxkCxG5XEIJBtKcxo3gO2gki+BRU=",
+        "name": "NorthWind.RazorComponents.soj30lot61.wasm",
+        "hash": "sha256-lEV98EeHqGDcom37GGQqJLi+Cn7OqepRRoPBiFVqrcQ=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Entities.wasm",
-        "name": "NorthWind.Sales.Entities.q60y3mha2y.wasm",
-        "hash": "sha256-jj9o7/jyUvmIY8eDFJpl0TZfvC6jfMk4e/5SBgcAqmA=",
+        "name": "NorthWind.Sales.Entities.lam6a89vv6.wasm",
+        "hash": "sha256-o48dgCvnSNvX/mtL3IWZfXnvNaePvWFOZos/ea6pdU0=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Frontend.BusinessObjects.wasm",
-        "name": "NorthWind.Sales.Frontend.BusinessObjects.yqjngkyq2d.wasm",
-        "hash": "sha256-ukOY0eKlbeMfpxFeH8urf8FvB0W9ncuDhcG817raztI=",
+        "name": "NorthWind.Sales.Frontend.BusinessObjects.kternt78d4.wasm",
+        "hash": "sha256-OAHyZ9QxgGOZrgFkh7W8MGGN5SbKyez4G2E61MLoYUE=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Frontend.IoC.wasm",
-        "name": "NorthWind.Sales.Frontend.IoC.6jay624cnu.wasm",
-        "hash": "sha256-LkjSz/t/gyLzZatfn66CKAWFuO0vDmyA7cknrm5nTls=",
+        "name": "NorthWind.Sales.Frontend.IoC.7s2pdj6rp8.wasm",
+        "hash": "sha256-qazSUfd/Aq3u0SYMMd/U4WDCJP9aY4oVgySZ/fqCrzk=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Frontend.Views.wasm",
-        "name": "NorthWind.Sales.Frontend.Views.ntyiwby5c4.wasm",
-        "hash": "sha256-NfMVkPWu9D674DXoyAZBJMZUmJwvR4VLt4X1StwxoQE=",
+        "name": "NorthWind.Sales.Frontend.Views.17vy94hzl7.wasm",
+        "hash": "sha256-kySSyFFtQeX3yPBEMME7BPFEYblBFgtx3PAMvvcXIVU=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Frontend.WebApiGateways.wasm",
-        "name": "NorthWind.Sales.Frontend.WebApiGateways.ns5d37ycjl.wasm",
-        "hash": "sha256-l90CKJXce8tL8Iy/bg9/U2wU2D9m4phLjoHRlPt4zwQ=",
+        "name": "NorthWind.Sales.Frontend.WebApiGateways.ua0rf46w2d.wasm",
+        "hash": "sha256-RpnGxqR+pCcNh1WfDZ10PswsQlahoM0JKRVPyihz/5E=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Validators.Entities.wasm",
-        "name": "NorthWind.Sales.Validators.Entities.5krh5wurdr.wasm",
-        "hash": "sha256-xeqewOyWw25417/CPEL5ajehvjfd8zsdRqMMuVT9bic=",
+        "name": "NorthWind.Sales.Validators.Entities.ianr11kbgm.wasm",
+        "hash": "sha256-qvNJSmIRfYNQXLz0Nr1wVjxWKftPpFHvZcp3JVMZLg4=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Validation.Entities.wasm",
-        "name": "NorthWind.Validation.Entities.kvj23wu37m.wasm",
-        "hash": "sha256-4CuvI2j0DfX1MMboP42w4MCQneWjElvTHp9mO7ILDEw=",
+        "name": "NorthWind.Validation.Entities.ojygkpq549.wasm",
+        "hash": "sha256-HHXyN1vfJieAWpVHCuQ3+1S7RrWHGkguIBWoRS4OIrg=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.ValidationService.FluentValidation.wasm",
-        "name": "NorthWind.ValidationService.FluentValidation.cpljhjccl7.wasm",
-        "hash": "sha256-oJEMlvTcEEgKNDUwlvTSppFDvLaOasv7WhUfAMBBTKE=",
+        "name": "NorthWind.ValidationService.FluentValidation.l623xpycba.wasm",
+        "hash": "sha256-M+2HGpr+jqGJsKbUAXvWBouhvm0FL9rUKWWlmwNegmU=",
         "cache": "force-cache"
       },
       {
@@ -1356,76 +1356,76 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "NorthWind.Sales.BlazorClient.wasm",
-        "name": "NorthWind.Sales.BlazorClient.gkp0qq1fab.wasm",
-        "hash": "sha256-kKyVSkGK9O/O60LV1NsKvE8z4deKP2KjTmeXhe0alUk=",
+        "name": "NorthWind.Sales.BlazorClient.qr2c9pqoe5.wasm",
+        "hash": "sha256-+hlnfizE7tDkM1SZOxYZHaQ4Lk0yggFyMqCOCTKQwks=",
         "cache": "force-cache"
       }
     ],
     "pdb": [
       {
         "virtualPath": "NorthWind.Sales.Frontend.IoC.pdb",
-        "name": "NorthWind.Sales.Frontend.IoC.rrawmp5zrx.pdb",
-        "hash": "sha256-eReu0JH/CxK0zSdpw6srIeeOiog6Ydc/3rwdk6/7QPU=",
+        "name": "NorthWind.Sales.Frontend.IoC.mb4a96oqjw.pdb",
+        "hash": "sha256-YrVcE1B8zmFGYm6ipsQ+Se9RmH7Yn15ehxbLlacgd4w=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.HttpDelegatingHandlers.pdb",
-        "name": "NorthWind.HttpDelegatingHandlers.uy60en6537.pdb",
-        "hash": "sha256-urIzvc1ZfMzRRc8p1uLAQbQx4ZDV1GamGm+bxjm8BS8=",
+        "name": "NorthWind.HttpDelegatingHandlers.wchzxtz8gg.pdb",
+        "hash": "sha256-oMd8ng6pWtEBR9UIIkzgr0qXTDsgertGcZsg18ZhIAU=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.RazorComponents.pdb",
-        "name": "NorthWind.RazorComponents.ar2wj8n3mf.pdb",
-        "hash": "sha256-9hg6x/6XLSF6p211M9SlVyPT/2xLCVqqZM1HYvUEht4=",
+        "name": "NorthWind.RazorComponents.x45hor5yu0.pdb",
+        "hash": "sha256-QWgQ7kke3gU8QwAoDJ8l4Ip9S6jch0/hTmfb6BrzNm0=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Entities.pdb",
-        "name": "NorthWind.Sales.Entities.oo4eb50i1w.pdb",
-        "hash": "sha256-yFFFRhlGhoTV5PIWDH/e6Fp5eZ430zvkEEXROwhWKAk=",
+        "name": "NorthWind.Sales.Entities.9ee3hwn8q7.pdb",
+        "hash": "sha256-oQydr0RuA1dqbrf+9hej69VvwB44AIaOZr6fsEUFQLA=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Frontend.BusinessObjects.pdb",
-        "name": "NorthWind.Sales.Frontend.BusinessObjects.cfg01memzk.pdb",
-        "hash": "sha256-2JNs4YH9rWi5K2Iawy1SyRUESLpa59J0CT4/fI0aKI0=",
+        "name": "NorthWind.Sales.Frontend.BusinessObjects.x7t865ofcx.pdb",
+        "hash": "sha256-7X9UCpqY8chM65AHEQDEuBpy9PFBKB7YqRqy7EgufKs=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Frontend.Views.pdb",
-        "name": "NorthWind.Sales.Frontend.Views.llmcvh3n0y.pdb",
-        "hash": "sha256-l6/K9VDT3n+UhLBiUSOy+QWoZm+W5QFIvsjAyd+z3eg=",
+        "name": "NorthWind.Sales.Frontend.Views.ooy3vo7447.pdb",
+        "hash": "sha256-qN6wan936dP0StaUCiFUT+otJiliacQJFf8vMSrSJoY=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Frontend.WebApiGateways.pdb",
-        "name": "NorthWind.Sales.Frontend.WebApiGateways.jbjemsdxte.pdb",
-        "hash": "sha256-sdBYlQO8ASWIg3Wx2P8uuSYnKEWZpXuCq4N8LGp/g5k=",
+        "name": "NorthWind.Sales.Frontend.WebApiGateways.9s8yqi11lh.pdb",
+        "hash": "sha256-B21XkeUurKmBNJF6q23dpbtN01H1Wk1DtCGMRBvoZcs=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.Validators.Entities.pdb",
-        "name": "NorthWind.Sales.Validators.Entities.9xag7jrjii.pdb",
-        "hash": "sha256-s2Hn6/YB18PwFhWEGd+ND9E53B0VRW+sjrbppqUZG2s=",
+        "name": "NorthWind.Sales.Validators.Entities.rzri30e67z.pdb",
+        "hash": "sha256-N6FVDRBSmoUhyrHCT6jug/qEdaJMLauvBuPMa8RLiO4=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Validation.Entities.pdb",
-        "name": "NorthWind.Validation.Entities.07elilxa7n.pdb",
-        "hash": "sha256-5G7hB7DfWxfuZt0hD9XNk6j2T4VgkRF4O3ZrvKlSpBg=",
+        "name": "NorthWind.Validation.Entities.67q1a8oim2.pdb",
+        "hash": "sha256-4qTOE7ifJe0iogN+1llOD9P4OToSQ5fVhMUpDwkY920=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.ValidationService.FluentValidation.pdb",
-        "name": "NorthWind.ValidationService.FluentValidation.11deagtk4s.pdb",
-        "hash": "sha256-dZPqvZxomPELVYVtXhuzTzQ7ltBd2jPTSQnpItOtlyM=",
+        "name": "NorthWind.ValidationService.FluentValidation.e06drneecb.pdb",
+        "hash": "sha256-rnZUV1JerZpcbRmrWFrEPbLxNhYUpQZfAWjMfZJPP/g=",
         "cache": "force-cache"
       },
       {
         "virtualPath": "NorthWind.Sales.BlazorClient.pdb",
-        "name": "NorthWind.Sales.BlazorClient.ftt11mxmod.pdb",
-        "hash": "sha256-M5aLPIAqJ5ERPo+S5BvcngKHaPvAj+OKR9UW7cbpmQU=",
+        "name": "NorthWind.Sales.BlazorClient.be8pvyg08s.pdb",
+        "hash": "sha256-PcLgidIiSgWPz8/xKzSFbwp1wuzGcuga9SLYfGLjftg=",
         "cache": "force-cache"
       }
     ],

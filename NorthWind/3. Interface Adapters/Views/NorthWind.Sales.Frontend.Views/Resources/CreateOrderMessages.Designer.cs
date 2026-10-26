@@ -109,4 +109,20 @@ public static class CreateOrderMessages
         ResourceManager.GetString(nameof(OrderDetailSectionTitle), Culture)!;
     public static string OrderEmptyHintText =>
         ResourceManager.GetString(nameof(OrderEmptyHintText), Culture)!;
+    public static string FilterAllText =>
+        ResourceManager.GetString(nameof(FilterAllText), Culture)!;
+    public static string FilterIdText =>
+        ResourceManager.GetString(nameof(FilterIdText), Culture)!;
+    public static string FilterNameText =>
+        ResourceManager.GetString(nameof(FilterNameText), Culture)!;
+    public static string StockLabel =>
+        ResourceManager.GetString(nameof(StockLabel), Culture)!;
+    public static string CustomerDebtBlockedMessage =>
+        ResourceManager.GetString(nameof(CustomerDebtBlockedMessage), Culture)!;
+    public static string QuantityExceedsStockMessage =>
+        ResourceManager.GetString(nameof(QuantityExceedsStockMessage), Culture)!;
+    public static string AlreadyAddedText =>
+        ResourceManager.GetString(nameof(AlreadyAddedText), Culture)!;
+    public static string AlreadyAddedMark =>
+        ResourceManager.GetString(nameof(AlreadyAddedMark), Culture)!;
 }

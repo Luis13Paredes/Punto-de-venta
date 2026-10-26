@@ -10,9 +10,12 @@
         <InputText
             id="FirstName"
             class="form-control"
+            maxlength="25"
+            onkeydown="@("if(event.key.length===1&&!/[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/.test(event.key))event.preventDefault()")"
             placeholder=
                 "@UserRegistrationMessages.FirstNameLabel"
-            @bind-Value=ViewModel.FirstName />
+            @bind-Value="ViewModel.FirstName"
+            @bind-Value:after="SanitizeFirstName" />
         <ValidationMessage For="@(() => ViewModel.FirstName)" />
     </div>
 
@@ -23,9 +26,12 @@
         <InputText
             id="LastName"
             class="form-control"
+            maxlength="25"
+            onkeydown="@("if(event.key.length===1&&!/[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]/.test(event.key))event.preventDefault()")"
             placeholder=
                 "@UserRegistrationMessages.LastNameLabel"
-            @bind-Value=ViewModel.LastName />
+            @bind-Value="ViewModel.LastName"
+            @bind-Value:after="SanitizeLastName" />
         <ValidationMessage For="@(() => ViewModel.LastName)" />
     </div>
 
@@ -36,8 +42,11 @@
         <InputText
             id="Email"
             class="form-control"
+            maxlength="50"
+            onkeydown="@(@"if(event.key.length===1){if(!/[a-zA-Z0-9._@-]/.test(event.key))event.preventDefault();else{var p=event.target.value.split('@');if(event.key==='.'&&p.length===2&&/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/.test(p[1]))event.preventDefault();}}")"
             placeholder="@CommonMessages.EmailLabel"
-            @bind-Value=ViewModel.Email />
+            @bind-Value="ViewModel.Email"
+            @bind-Value:after="SanitizeEmail" />
         <ValidationMessage For="@(() => ViewModel.Email)" />
     </div>
 

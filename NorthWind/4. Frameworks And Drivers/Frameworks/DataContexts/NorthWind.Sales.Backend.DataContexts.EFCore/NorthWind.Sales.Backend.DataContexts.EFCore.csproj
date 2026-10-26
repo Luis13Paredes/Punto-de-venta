@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\3. Interface Adapters\Gateways\Repositories\NorthWind.Sales.Backend.Repositories\NorthWind.Sales.Backend.Repositories.csproj" />
     <ProjectReference Include="..\..\..\..\1. Enterprise Business Rules\NorthWind.Exceptions.Entities\NorthWind.Exceptions.Entities.csproj" />
+    <ProjectReference Include="..\..\..\..\1. Enterprise Business Rules\NorthWind.Transactions.Entities\NorthWind.Transactions.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -581,14 +581,14 @@
     "NorthWind.Membership.Entities/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-vdq6gfVLhstiHa/Yt2scKReUkEBu953XS0Z7YbhuOFOYR5jvug4jkthz/kfr2/GrZODGMypVdY7vTUhHkrGecg==",
+      "sha512": "sha512-tux8FmnffzjT7/HG0ADm3WeRV6QuDu5ogv2sbbxs6HqDudpvuPUajVQmSIvZzohoioMSOYU6vcASiTfaT/blQw==",
       "path": "northwind.membership.entities/1.0.0",
       "hashPath": "northwind.membership.entities.1.0.0.nupkg.sha512"
     },
     "NorthWind.Membership.Frontend.RazorViews/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-8KLifXPmTYUmZY36PDhqTE6eHIv0p6+05OmC40P1kpd798WHq3VD2tOW1joky4ejnZ0wRLqqK3F6ts/Cnvve/g==",
+      "sha512": "sha512-DpTgOfkdyZGlnhF+SiM9v2LVmtReqsH/fpeZsanSMBwSsHY4xNyjrhX7yZaa1Y8ldO7Phkeu55MzdH4eRwL6Iw==",
       "path": "northwind.membership.frontend.razorviews/1.0.0",
       "hashPath": "northwind.membership.frontend.razorviews.1.0.0.nupkg.sha512"
     },

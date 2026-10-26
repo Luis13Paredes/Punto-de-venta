@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using NorthWind.Membership.Frontend.RazorViews.Components;
 using NorthWind.Sales.Entities.Dtos.Search;
 using NorthWind.Sales.Frontend.Views.ViewModels.CreateOrder;
 
@@ -90,6 +91,7 @@ public partial class CreateOrderComponent
         if (detail.ProductId <= 0)
         {
             detail.UnitPrice = 0;
+            detail.UnitsInStock = 0;
             return;
         }
 
@@ -98,7 +100,7 @@ public partial class CreateOrderComponent
         {
             // The backend search matches by id or name; exact id wins below.
             var Result = await Order.SearchProducts(
-                detail.ProductId.ToString(), 1, 5);
+                detail.ProductId.ToString(), "id", 1, 5);
 
             if (Version != ProductLookupVersion)
                 return;
@@ -106,10 +108,24 @@ public partial class CreateOrderComponent
             var Match = Result.Items
                 .FirstOrDefault(p => p.Id == detail.ProductId);
             detail.UnitPrice = Match?.UnitPrice ?? 0;
+            detail.UnitsInStock = Match?.UnitsInStock ?? 0;
         }
         catch (HttpRequestException)
         {
             // API unavailable: keep the current price.
         }
     }
+
+    void SanitizeShipAddress() =>
+        Order.ShipAddress = InputFilters.FilterAddress(Order.ShipAddress);
+
+    void SanitizeShipCity() =>
+        Order.ShipCity = InputFilters.FilterName(Order.ShipCity);
+
+    void SanitizeShipCountry() =>
+        Order.ShipCountry = InputFilters.FilterName(Order.ShipCountry);
+
+    void SanitizeShipPostalCode() =>
+        Order.ShipPostalCode =
+            InputFilters.FilterDigits(Order.ShipPostalCode);
 }

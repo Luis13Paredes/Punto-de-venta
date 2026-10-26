@@ -1106,7 +1106,7 @@
     "NorthWind.Membership.Entities/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-vdq6gfVLhstiHa/Yt2scKReUkEBu953XS0Z7YbhuOFOYR5jvug4jkthz/kfr2/GrZODGMypVdY7vTUhHkrGecg==",
+      "sha512": "sha512-L3IUpFLdsUFd3Jct+35cWohsdu6rgPEft5jOgr9q5uUY9fv/9HnwY0F5xDMUfX4OzD9bOktCdEcFJhVJres1pw==",
       "path": "northwind.membership.entities/1.0.0",
       "hashPath": "northwind.membership.entities.1.0.0.nupkg.sha512"
     },
@@ -1120,7 +1120,7 @@
     "NorthWind.Validation.Entities/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-W0Z59TUwvhZN08ufcDoX/RPHUCdGoI23gYAw56qQ8moUYeAPlgGwjLyBqSUd+Y8uKKsqvOdX/6gabnx80QPz0A==",
+      "sha512": "sha512-ESeGxMquImHc+gb1xUuamnzK0Tvtf9PRAny1WnJk4TGTU+TcGPSLBqWd8avzZR1LR6gpyWjXhX1KyPIUouwFyA==",
       "path": "northwind.validation.entities/1.0.0",
       "hashPath": "northwind.validation.entities.1.0.0.nupkg.sha512"
     },

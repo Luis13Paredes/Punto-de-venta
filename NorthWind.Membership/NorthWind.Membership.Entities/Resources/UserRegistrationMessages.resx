@@ -35,14 +35,32 @@
   <data name="RequiredFirstNameErrorMessage" xml:space="preserve">
     <value>El nombre es requerido.</value>
   </data>
+  <data name="FirstNameMaximumLengthErrorMessage" xml:space="preserve">
+    <value>El nombre no puede exceder 25 caracteres.</value>
+  </data>
+  <data name="FirstNameInvalidFormatErrorMessage" xml:space="preserve">
+    <value>El nombre solo puede contener letras y espacios.</value>
+  </data>
   <data name="RequiredLastNameErrorMessage" xml:space="preserve">
     <value>El apellido es requerido.</value>
+  </data>
+  <data name="LastNameMaximumLengthErrorMessage" xml:space="preserve">
+    <value>El apellido no puede exceder 25 caracteres.</value>
+  </data>
+  <data name="LastNameInvalidFormatErrorMessage" xml:space="preserve">
+    <value>El apellido solo puede contener letras y espacios.</value>
   </data>
   <data name="RequiredEmailErrorMessage" xml:space="preserve">
     <value>El correo es requerido.</value>
   </data>
+  <data name="EmailMaximumLengthErrorMessage" xml:space="preserve">
+    <value>El correo no puede exceder 50 caracteres.</value>
+  </data>
   <data name="InvalidEmailErrorMessage" xml:space="preserve">
     <value>El formato de correo no es válido.</value>
+  </data>
+  <data name="InvalidEmailCharactersErrorMessage" xml:space="preserve">
+    <value>El correo solo puede contener letras, números y los caracteres punto (.), guion bajo (_) y arroba (@).</value>
   </data>
   <data name="RequiredPasswordErrorMessage" xml:space="preserve">
     <value>La contraseña es requerida.</value>

@@ -17,6 +17,11 @@ public static class DependencyContainer
         services.AddScoped<INorthWindDomainLogsDataContext,
             NorthWindDomainLogsDataContext>();
 
+        // Portable transaction (Windows/Linux): EF Core transaction on
+        // the commands DbContext; replaces the old TransactionScope
+        // (MSDTC / PlatformNotSupportedException on Linux).
+        services.AddScoped<IDomainTransaction, EFCoreDomainTransaction>();
+
         return services;
     }
 }

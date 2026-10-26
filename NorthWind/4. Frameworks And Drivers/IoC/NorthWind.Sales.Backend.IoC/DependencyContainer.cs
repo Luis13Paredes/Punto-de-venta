@@ -22,7 +22,6 @@ public static class DependencyContainer
             .AddEventServices()
             .AddMailServices(configureSmtpOptions)
             .AddDomainLogsServices()
-            .AddTransactionServices()
             .AddUserServices()
             .AddMembershipCoreServices(configureJwtOptions)
             .AddMembershipIdentityServices(configureMembershipDBOptions);

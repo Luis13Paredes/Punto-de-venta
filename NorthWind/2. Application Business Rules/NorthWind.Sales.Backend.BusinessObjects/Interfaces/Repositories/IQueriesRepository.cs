@@ -7,13 +7,16 @@ public interface IQueriesRepository
         GetProductsUnitsInStock(IEnumerable<int> productIds);
 
     // Requirement 15: smart search with pagination.
+    // filterBy: "all" (id or name), "id" or "name".
     Task<PagedResultDto<CustomerResultDto>> SearchCustomers(
-        string? searchTerm, int page, int pageSize);
+        string? searchTerm, int page, int pageSize,
+        string? filterBy);
 
     // Requirement 15 (search) + requirement 8 (only products
     // with stock greater than zero).
     Task<PagedResultDto<ProductResultDto>> SearchProducts(
-        string? searchTerm, int page, int pageSize);
+        string? searchTerm, int page, int pageSize,
+        string? filterBy);
 
     // Requirement 12: rebuild a saved invoice (header + detail).
     Task<InvoiceDto?> GetInvoice(int orderId);

@@ -13,6 +13,17 @@
         </div>
         <div class="search-modal-body">
             <div class="search-modal-toolbar">
+                @if (ShowFilter)
+                {
+                    <select class="form-control search-modal-filter"
+                            title="Filtrar por"
+                            @bind="FilterBy"
+                            @bind:after="OnFilterChanged">
+                        <option value="all">@FilterAllText</option>
+                        <option value="id">@FilterIdText</option>
+                        <option value="name">@FilterNameText</option>
+                    </select>
+                }
                 <input class="form-control search-modal-input"
                        placeholder="@SearchPlaceholder"
                        autofocus
@@ -38,11 +49,19 @@
                         @foreach (var Item in Result.Items)
                         {
                             var Current = Item;
-                            <tr class="search-modal-row"
+                            <tr class="search-modal-row @(IsBlocked(Current) ? "search-modal-row-blocked" : null)"
+                                title="@(IsBlocked(Current) ? BlockedItemTitle : null)"
                                 @onclick="() => SelectAsync(Current)">
                                 @RowTemplate!(Current)
                                 <td class="search-modal-select-cell">
-                                    <span class="search-modal-select-mark">&#10003;</span>
+                                    @if (IsBlocked(Current))
+                                    {
+                                        <span class="search-modal-select-blocked">@BlockedItemMark</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="search-modal-select-mark">&#10003;</span>
+                                    }
                                 </td>
                             </tr>
                         }

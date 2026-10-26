@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <authors>NorthWind.Membership.Frontend.RazorViews</authors>
     <description>Package Description</description>
-    <repository type="git" commit="d673490ab0ad794a12cd32a1a1f3d6ceff13597c" />
+    <repository type="git" commit="3a2cbdad0e6684c5eb7922ca12e4b1539c7b292f" />
     <dependencies>
       <group targetFramework="net10.0">
         <dependency id="Microsoft.AspNetCore.Components.Authorization" version="10.0.0" exclude="Build,Analyzers" />

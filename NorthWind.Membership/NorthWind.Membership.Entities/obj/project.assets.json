@@ -65,7 +65,7 @@
       ]
     },
     "NorthWind.Validation.Entities/1.0.0": {
-      "sha512": "W0Z59TUwvhZN08ufcDoX/RPHUCdGoI23gYAw56qQ8moUYeAPlgGwjLyBqSUd+Y8uKKsqvOdX/6gabnx80QPz0A==",
+      "sha512": "ESeGxMquImHc+gb1xUuamnzK0Tvtf9PRAny1WnJk4TGTU+TcGPSLBqWd8avzZR1LR6gpyWjXhX1KyPIUouwFyA==",
       "type": "package",
       "path": "northwind.validation.entities/1.0.0",
       "files": [

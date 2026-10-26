@@ -14,26 +14,32 @@ internal class CreateOrderDtoValidator :
                 CreateOrderMessages.CustomerIdInvalidFormat);
 
         AddRuleFor(c => c.ShipAddress)
+            .StopOnFirstFailure()
             .NotEmpty(CreateOrderMessages.ShipAddressRequired)
-            .MaximumLength(60, CreateOrderMessages.ShipAddressMaximumLength);
+            .MaximumLength(30, CreateOrderMessages.ShipAddressMaximumLength)
+            .Matches(@"^[A-Za-zÁÉÍÓÚÜáéíóúüñÑ0-9 .,#°-]+$",
+                CreateOrderMessages.ShipAddressInvalidFormat);
 
         AddRuleFor(c => c.ShipCity)
+            .StopOnFirstFailure()
             .NotEmpty(CreateOrderMessages.ShipCityRequired)
             .MinimumLength(3, CreateOrderMessages.ShipCityMinimumLength)
-            .MaximumLength(15, CreateOrderMessages.ShipCityMaximumLength)
+            .MaximumLength(30, CreateOrderMessages.ShipCityMaximumLength)
             .Matches(@"^[A-Za-zÁÉÍÓÚÜáéíóúüñÑ ]+$",
                 CreateOrderMessages.ShipCityOnlyLetters);
 
         AddRuleFor(c => c.ShipCountry)
+            .StopOnFirstFailure()
             .NotEmpty(CreateOrderMessages.ShipCountryRequired)
             .MinimumLength(3, CreateOrderMessages.ShipCountryMinimumLength)
-            .MaximumLength(15, CreateOrderMessages.ShipCountryMaximumLength)
+            .MaximumLength(30, CreateOrderMessages.ShipCountryMaximumLength)
             .Matches(@"^[A-Za-zÁÉÍÓÚÜáéíóúüñÑ ]+$",
                 CreateOrderMessages.ShipCountryOnlyLetters);
 
         AddRuleFor(c => c.ShipPostalCode)
+            .StopOnFirstFailure()
             .NotEmpty(CreateOrderMessages.ShipPostalCodeRequired)
-            .MaximumLength(10, CreateOrderMessages.ShipPostalCodeMaximumLength)
+            .MaximumLength(6, CreateOrderMessages.ShipPostalCodeMaximumLength)
             .Matches(@"^[0-9]*$",
                 CreateOrderMessages.ShipPostalCodeOnlyDigits);
 

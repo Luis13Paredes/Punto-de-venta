@@ -15,8 +15,12 @@ public static class UserLoginMessages
 
     public static string RequiredEmailErrorMessage =>
         ResourceManager.GetString(nameof(RequiredEmailErrorMessage), Culture)!;
+    public static string EmailMaximumLengthErrorMessage =>
+        ResourceManager.GetString(nameof(EmailMaximumLengthErrorMessage), Culture)!;
     public static string InvalidEmailErrorMessage =>
         ResourceManager.GetString(nameof(InvalidEmailErrorMessage), Culture)!;
+    public static string InvalidEmailCharactersErrorMessage =>
+        ResourceManager.GetString(nameof(InvalidEmailCharactersErrorMessage), Culture)!;
     public static string RequiredPasswordErrorMessage =>
         ResourceManager.GetString(nameof(RequiredPasswordErrorMessage), Culture)!;
 }
